@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ring</title>
+    <link rel="stylesheet" type="text/css" href="../css/H5ComponentBase.css">
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            background: #000;
+        }
+        .iphone {
+            width: 340px;
+            height: 540px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -270px 0 0 -170px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 开发测试componentRing组件(环图组件) -->
+    <div class="iphone">
+      
+    </div>
+
+    <script type="text/javascript" src="../js/H5ComponentBase.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery.js"></script>
+    <!-- 复用饼图的资源 -->
+    <script type="text/javascript" src="../js/H5ComponentPie.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/H5ComponentPie.css">
+    <!-- 引入环图的资源 -->
+    <script type="text/javascript" src="../js/H5ComponentRing.js"></script>
+    <link rel="stylesheet" href="../css/H5ComponentRing.css">
+
+    <script type="text/javascript">
+        var cfg = {
+            type: 'ring',
+            width: 400,
+            height: 400,
+            data: [
+                ['Javascript', 0.4, '#ff7676'],
+                // ['HTML', 0.2],
+                // ['CSS3', 0.2],
+                // ['HTML5', 0.1],
+                // ['Bootstrap', 0.1]
+            ],
+            css: {
+                'top': 100,
+                'opacity': 0
+            },
+            animateIn: {top: 200,opacity: 1},
+            animateOut: {top: 100,opacity: 0},
+            center: true
+        };
+
+        var h5 = new H5ComponentRing('myRingComponent', cfg);
+        $('.iphone').append(h5);
+
+        var leave = true;
+        $('body').click(function () {
+            leave = !leave;
+            $('.h5-component').trigger(leave ? 'onLeave' : 'onLoad');
+        });
+    </script>
+
+</body>
+</html>
