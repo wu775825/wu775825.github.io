@@ -1,0 +1,72 @@
+/* 柱状图组件样式(垂直) */
+.h5-component-bar-v {
+}
+
+.h5-component-bar-v .line {
+    height: 100%;
+    font-size: 12px;
+    float: left;
+    position: relative;
+}
+
+.h5-component-bar-v .line .name {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    height: 20px;
+    line-height: 20px;
+    bottom: -20px;
+    text-align: center;
+}
+
+.h5-component-bar-v .line .rate {
+    height: 100%;
+    width: 44px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -22px;
+}
+
+.h5-component-bar-v .rate .bg {
+    background-color: #99c0ff;
+    width: 100%;
+    height: 0%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top-left-radius:30px;
+    border-top-right-radius:30px;
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+}
+
+.h5-component-bar-v .line .per {
+    width: 100%;
+    color: #99c0ff;
+    position: absolute;
+    left: 0;
+    top: -20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    -webkit-opacity: 0;
+}
+
+.h5-component-bar-v-load .rate .bg {
+    -webkit-transition: all 1s .5s;
+    height: 100%;
+}
+
+.h5-component-bar-v-leave .rate .bg {
+    height: 0%;
+}
+
+.h5-component-bar-v-load .line .per {
+    -webkit-transition:all 1s 1.5s;
+    -webkit-opacity: 1;
+}
+
+.h5-component-bar-v-leave .per {
+    -webkit-opacity: 0;
+}

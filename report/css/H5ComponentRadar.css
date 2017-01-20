@@ -1,0 +1,17 @@
+/* 雷达图组件样式 */
+.h5-component-radar {
+}
+
+.h5-component-radar canvas {
+    position: absolute;
+    left: 0;
+    top: 0; /* 用canvas做动画，会进行分层，所以需要脱离标准文档流 z-index*/
+    width: 100%;
+    height: 100%;
+    /*background: #ccc;*/
+}
+
+.h5-component-radar .text {
+    position: absolute;
+    -webkit-transition: all 1s;
+}
