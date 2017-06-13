@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>欢迎使用</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- jQuery -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<style type="text/css">
+	.signin-rit p {
+		float: left;
+		width: 100%;
+	}
+</style>
+</head> 
+ <body class="sign-in-up">
+    <section>
+			<div id="page-wrapper" class="sign-in-wrapper">
+				<div class="graphs">
+					<div class="sign-in-form">
+						<div class="sign-in-form-top">
+							<p><span>请你</span> <a href="#">输入代号</a></p>
+						</div>
+						<div class="signin">
+							<div class="signin-rit">
+								<p id="codeView"></p>
+								<div class="clearfix"> </div>
+							</div>
+							<form>
+								<div class="log-input">
+									<div class="log-input-left">
+									   <input type="password" id="code" class="lock" placeholder="加密" />
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="log-input">
+									<div class="log-input-left">
+									   <input type="password" id="decode" class="lock" placeholder="解密" />
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<input type="button" id="action" value="执行">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+<!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+   		$(document).ready(function () {
+   			var $codeView = $('#codeView');
+   			var $code = $('#code');
+   			var $decode = $('#decode');
+   			// code13
+   			function code13(str) {
+   			    var codeNum, tempArr = [];
+   			    for (var i = 0; i < str.length; i++) {
+   			    	if (parseInt(str[i]) || parseInt(str[i]) === 0) {
+   			    		codeNum = str.charCodeAt(i) - 13;
+   			    		while (codeNum < 48) {
+   			    			codeNum = 57 - (48 - codeNum);
+   			    		}
+   			    		if (str.charCodeAt(i) === 48) {
+   			    			codeNum = 57;
+   			    		}
+   			    		tempArr.push(String.fromCharCode(codeNum));
+   			    	} else {
+   			    		codeNum = str.charCodeAt(i) - 13;
+   			    		if (codeNum < 65) {
+   			    		    codeNum = 122 - (65 - codeNum);
+    		            }
+   			    		tempArr.push(String.fromCharCode(codeNum));
+   			    	}
+   			      }
+   			    var newStr = tempArr.join('');
+   			    return newStr;
+   			}
+   			// decode13
+   			function decode13(str) {
+   			    var codeNum, tempArr = [];
+   			    for (var i = 0; i < str.length; i++) {
+   			    	// digit 48-57
+   			    	// string 65-122(91-96)
+   			        if (parseInt(str[i]) || parseInt(str[i]) === 0) {
+   			    		codeNum = str.charCodeAt(i) + 13;
+   			    		while (codeNum > 57) {
+   			    			codeNum = 48 + (codeNum - 57);
+   			    		}
+   			    		if (str.charCodeAt(i) === 57) {
+   			    			codeNum = 48;
+   			    		}
+   			    		tempArr.push(String.fromCharCode(codeNum));
+   			    	} else {
+   			    		codeNum = str.charCodeAt(i) + 13;
+   			    		if (codeNum > 122) {
+   			    		    codeNum = 65 + (122 - codeNum);
+    		            }
+   			    		tempArr.push(String.fromCharCode(codeNum));
+   			    	}
+   			      }
+   			    var newStr = tempArr.join('');
+   			    return newStr;
+   			}
+   			// action
+   			$("#action").click(function () {
+   				var codeVal = $code.val();
+   				var decodeVal = $decode.val();
+   				if (codeVal !== '' && decodeVal === '') {
+   					$codeView.html(code13(codeVal));
+   				} else if (decodeVal !== '' && codeVal === '') {
+   					$codeView.html(decode13(decodeVal));
+   				} else {
+   					if ($codeView.html() === '') {
+   						$codeView.html('Error! Please try againt');
+   					}
+   				}
+   				$code.val('');
+   				$decode.val('');
+   			});
+   		});
+   </script>
+</body>
+</html>
