@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="wap-font-scale" content="no">
+  <title>pie</title>
+  <link rel="stylesheet" type="text/css" href="css/iconfont/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="style/reset.css">
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    section {
+        margin: 40px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <canvas id="canvas1"></canvas>
+  </section>
+
+  <section>
+    <div class="middleContent fixTop">
+      <div class="surePass" >
+        
+        <canvas class="circleRun" width="300" height="300" data-run="0" id="canvasThree" amout="1000" nowData="1000"></canvas>
+      </div>
+   </div>
+  </section>
+
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- canvas1 -->
+  <script type="text/javascript" src="js/Progress.js"></script>
+  <!-- canvas2 -->
+  <script type="text/javascript" src="js/zcircleMove.js"></script>
+  <script type="text/javascript">
+    window.onload = function(){
+        new Progress().renderOne('canvas1',300,10,60);
+    };
+  </script>
+  <script>
+    $(function(){
+      var findCanvas=$("#canvasThree");
+      var percents=findCanvas.attr('nowData')/findCanvas.attr('amout');
+      runCircle(
+      {
+        obj:'canvasThree', 
+        percent: 0.6,   //percents 为百分比的值  范围 0- 1
+        url:'images/zstart.png',   //飞机小图地址
+        imgWidth: 1,
+        imgHeight: 1,
+        circleBottomColor:"#e6eaed",//圆环底色
+        outerColorStart:'#ebf7ff',  //外部圆环 渐变色
+        outerColorMid:'#d8eefc',
+        outerColorEnd:'#a7cee7',
+        innerColorStart:'#6fbef0',  //内部圆环 渐变色
+        innerColorEnd:'#058ee4',
+      }
+      );
+    });
+  </script>
+</body>
+</html>
