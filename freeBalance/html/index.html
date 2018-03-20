@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../css/base.css">
+  <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <title>大健康</title>
+  <style type="text/css">
+    body {
+      background: #f2f2f2;
+    }
+    /*header*/
+    #row {
+      position: absolute;
+      left: calc(50% - 105px);
+      top: 87%;
+      width: 206px;
+      height: 30px;
+      transition: transform .6s;
+    }
+    .my-header {
+      position: relative;
+      height: 237px;
+      overflow: hidden;
+      background: linear-gradient(#4dc3f4, #2face2, #0c93cd);
+    }
+    .weight-info {
+      padding-top: 87px;
+      text-align: center;
+    }
+    .weight-type {
+      font-weight: 300;
+      font-size: 0.74rem;
+    }
+    .weight-info p:last-child {
+      font-size: 1.3rem;
+    }
+    @media only screen and (min-width: 480px) {
+      .weight-info p:last-child {
+        font-size: 1.2rem;
+      }
+    }
+    .arc {
+      position: relative;
+      height: 157px;
+      background: url('../img/gauge.png') no-repeat;
+      background-position: 50% 92%;
+      background-size: 220px 110px;
+    }
+    .person-height p:first-child, .person-bmi p:first-child,
+    .person-oldWeight p:first-child, .person-score p:first-child {
+      font-size: 0.72rem;
+      font-weight: 200;
+    }
+    #height, #bmi, #oldWeight, #score {
+      font-size: 1.1rem;
+    }
+    .person-height, .person-bmi, 
+    .person-oldWeight, .person-score {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /*swiper-pagination*/
+    .pagination {
+      position: absolute;
+      left: 0;
+      text-align: center;
+      bottom: 6px;
+      width: 100%;
+    }
+    .swiper-pagination-switch {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255, 0);
+      border: 1px solid #fff;
+      margin: 0 3px;
+      cursor: pointer;
+    }
+    .swiper-active-switch {
+      background: #fff;
+    }
+    /*history-weight*/
+    .history-weight {
+      height: 218px;
+      margin: 15px 0 15px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="my-header">
+    <div class="arc">
+      <img src="../img/row.png" id="row" class="">
+      <div class="weight-info color-fff">
+        <p class="weight-type">标准</p>
+        <p><span class="weight">120.1</span><span>斤</span></p>
+      </div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper" style="height: 80px;">
+            <div class="weui-flex swiper-slide">
+              <div class="weui-flex__item person-height color-fff  text-center">
+                <p>身高(cm)</p>
+                <p id="height">170</p>
+              </div>
+              <div class="weui-flex__item person-bmi color-fff text-center">
+                <p>BMI</p>
+                <p id="bmi">22.1</p>
+              </div>
+            </div>
+            <div class="weui-flex swiper-slide">
+              <div class="weui-flex__item person-oldWeight color-fff  text-center">
+                <p>上次体重</p>
+                <p id="oldWeight">119.2斤</p>
+              </div>
+              <div class="weui-flex__item person-score color-fff text-center">
+                <p>得分</p>
+                <p id="score">97.1</p>
+              </div>
+            </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="pagination"></div>
+    </div>
+  </header>
+
+  <!-- history-weight -->
+  <section class="history-weight">
+    <div id="historyWeight" style="height: 218px"></div>
+  </section>
+  <!-- tabbar -->
+  <!-- <div class="weui-tabbar">
+    <a href="javascript:;" class="weui-tabbar__item weui-bar__item--on">
+      <div class="weui-tabbar__icon">
+        <img src="./images/icon_nav_button.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">微信</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="./images/icon_nav_msg.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">通讯录</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="./images/icon_nav_article.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">发现</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="./images/icon_nav_cell.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">我</p>
+    </a>
+  </div> -->
+
+  <!-- script -->
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      // swiper
+      $('.swiper-container').swiper({
+          loop: true,
+          pagination: '.pagination',
+      });
+
+      // history-weight
+      var myChart = echarts.init(document.getElementById('historyWeight'));
+      option = {
+          title: {
+              text: '历史体重',
+              textStyle: {
+                color: '#3da2d5',
+                fontSize: 16,
+                fontWeight: '500'
+              },
+              link: '',
+              top: 8,
+              left: 8
+          },
+          toolbox: {
+              feature: {
+                  saveAsImage: {}
+              }
+          },
+          grid: {
+              left: '6%',
+              right: '6%',
+              top: '45',
+              height: 130,
+              containLabel: true
+          },
+          xAxis : {
+              boundaryGap: false,
+              splitLine: {
+                show: true,
+                interval: 'auto',
+                lineStyle: {
+                  color: '#eee'
+                }
+              },
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#eee'
+                }
+              },
+              axisLabel: {
+                color: '#999'
+              },
+              data : ['03-01','03-02','03-03','03-04','03-05']
+          },
+          yAxis : {
+              type: 'value',
+              min: function(value) {
+                    return value.min - 30;
+              },
+              max: function(value) {
+                    return value.max + 30;
+              },
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#eee'
+                }
+              },
+              axisLabel: {
+                show: false
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#eee'
+                }
+              }
+          },
+          series : {
+              name:'体重',
+              type:'line',
+              smooth: true,
+              symbol: 'circle',
+              symbolSize: 6,
+              label: {
+                normal: {
+                  show: true,
+                  color: '#00ac82'
+                }
+              },
+              areaStyle: {
+                normal: {
+                  color: "#d4f7ed"
+                }
+              },
+              itemStyle: {
+                normal: {
+                  color: '#00ac82'
+                }
+              },
+              lineStyle: {
+                normal: {
+                  width: 2
+                }
+              },
+              data:[119.2, 119.9, 118.9, 119.5, 118.8]
+          },
+          dataZoom: [
+            {
+              type: 'slider',
+              show: true,
+              dataBackground: {
+                lineStyle: {
+                  color: '#d4f7ed'
+                },
+                areaStyle: {
+                  color: '#28b3ea'
+                }
+              },
+              fillerColor: 'rgba(212,247,237, .5)',
+              borderColor: '#fff',
+              handleStyle: {
+                color: '#00ac82'
+              },
+              xAxisIndex: [0],
+              bottom: 8,
+              start: 1, // 数据窗口范围的起始百分比
+              end: 80
+            }
+          ]
+      };
+      myChart.setOption(option);
+
+      $('#row').addClass('rote90');
+    });
+  </script>
+</body>
+</html>

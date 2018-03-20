@@ -1,0 +1,54 @@
+/*html {
+  font-size: 20px;
+}
+body {
+  font-size: 16px;
+}
+@media only screen and (min-width: 400px) {
+  html {
+    font-size: 21.33333333px !important;
+  }
+}
+@media only screen and (min-width: 414px) {
+  html {
+    font-size: 22.08px !important;
+  }
+}
+@media only screen and (min-width: 480px) {
+  html {
+    font-size: 25.6px !important;
+}*/
+
+body, html {
+  font-family: "Microsoft YaHei",sans-serif;
+}
+
+/*清除浮动*/
+.clearfix:before,
+.clearfix:after {
+    content: '';
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+.color-fff {
+  color: #fff;
+}
+.text-center {
+  text-align: center;
+}
+
+/*animation*/
+.rote90 {
+  transform: rotate(90deg);
+}
+
+
+
+
+
+
+
+

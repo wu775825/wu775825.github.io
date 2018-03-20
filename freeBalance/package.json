@@ -1,0 +1,19 @@
+{
+  "name": "freebalance",
+  "version": "1.0.0",
+  "description": "freebalance first version 1.0.0.in jbh.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "freebalance"
+  ],
+  "author": "queya",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^1.12.4",
+    "jquery-weui": "^1.2.0",
+    "swiper": "^2.7.6"
+  }
+}
