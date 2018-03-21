@@ -15,6 +15,27 @@
   <style type="text/css">
     body {
       background: #f2f2f2;
+      margin-bottom: 53px;
+    }
+    /*tabbar*/
+    .tab-icon {
+      background: url(../img/tabicon.png) 0px 0px no-repeat;
+      background-size: cover;
+    }
+    .tab-icon1 {
+      background-position: -27px 0;
+    }
+    .tab-icon2 {
+      background-position: -54px 0;
+    }
+    .tab-icon3 {
+      background-position: -81px 0;
+    }
+    .tab-active .weui-tabbar__label {
+      color: #3da2d5;
+    }
+    .tab-active .tab-icon {
+      background-position: -108px 0;
     }
     /*header*/
     #row {
@@ -80,9 +101,9 @@
     }
     .swiper-pagination-switch {
       display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
       background: rgba(255,255,255, 0);
       border: 1px solid #fff;
       margin: 0 3px;
@@ -93,9 +114,102 @@
     }
     /*history-weight*/
     .history-weight {
+      position: relative;
       height: 218px;
-      margin: 15px 0 15px;
+      margin: 16px 0 16px;
       background: #fff;
+    }
+    /*more-row*/
+    .more-row {
+      position: absolute;
+      height: 16px;
+      top: 14px;
+      right: 0;
+      left: 0;
+      background: rgba(255,255,255,0);
+    }
+    .more-row span {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 0;
+      right: 6%;
+      background: url('../img/more-row.png') no-repeat;
+      background-size: cover;
+    }
+    /*heath-analyse*/
+    .heath-analyse {
+      position: relative;
+      overflow: hidden;
+      height: 4.85rem;
+      margin-bottom: 16px;
+      background: #fff;
+    }
+    .heath-analyse .weui-flex__item {
+      font-size: 0.75rem;
+      color: #222;
+    }
+    .heath-analyse .weui-flex__item p:first-child {
+      color: #666;
+    }
+    .heath-analyse .weui-flex {
+      padding: 10px;
+    }
+    .heath-analyse .weui-flex__item:nth-child(2) {
+      border-left: 1px solid #999;
+      border-right: 1px solid #999;
+    }
+    /*special-column 226*/
+    .special-column {
+      height: 11.4rem;
+      background: #fff;
+      padding: 0 0.4rem 0.4rem;
+    }
+    .special-column .my-flex {
+      display: flex;
+      justify-content: space-around;
+      margin: 7px 0 9px;
+    }
+    .special-column .my-flex .my-flex__item {
+      width: 8.6rem;
+      height: 4.4rem;
+      cursor: pointer;
+      color: #fff;
+    }
+    .special-column .my-flex__item p:first-child {
+      margin-top: 23px;
+      font-size: 16px;
+    }
+    .special-column .my-flex__item p:last-child {
+      font-size: 0.6rem;
+    }
+    .special-sports {
+      margin-right: 8px;
+      background: url(../img/sport-plan.jpg);
+      background-size: cover;
+    }
+    .special-diet {
+      background: url(../img/diet-recommend.jpg);
+      background-size: cover;
+    }
+    .special-health {
+      margin-right: 8px;
+      background: url(../img/health-knowledge.jpg);
+      background-size: cover;
+    }
+    .special-expert {
+      background: url(../img/expert-advice.jpg);
+      background-size: cover;
+    }
+    footer {
+      height: 70px;
+      margin-top: 16px;
+      color: #a1a1a1;
+      font-size: 0.6rem;
+      text-align: center;
+    }
+    footer p {
+      padding: 0.2rem;
     }
   </style>
 </head>
@@ -140,35 +254,89 @@
   <!-- history-weight -->
   <section class="history-weight">
     <div id="historyWeight" style="height: 218px"></div>
+    <a href="javascript:void(0);" class="more-row">
+      <span></span>
+    </a>
   </section>
-  <!-- tabbar -->
-  <!-- <div class="weui-tabbar">
-    <a href="javascript:;" class="weui-tabbar__item weui-bar__item--on">
-      <div class="weui-tabbar__icon">
-        <img src="./images/icon_nav_button.png" alt="">
-      </div>
-      <p class="weui-tabbar__label">微信</p>
-    </a>
-    <a href="javascript:;" class="weui-tabbar__item">
-      <div class="weui-tabbar__icon">
-        <img src="./images/icon_nav_msg.png" alt="">
-      </div>
-      <p class="weui-tabbar__label">通讯录</p>
-    </a>
-    <a href="javascript:;" class="weui-tabbar__item">
-      <div class="weui-tabbar__icon">
-        <img src="./images/icon_nav_article.png" alt="">
-      </div>
-      <p class="weui-tabbar__label">发现</p>
-    </a>
-    <a href="javascript:;" class="weui-tabbar__item">
-      <div class="weui-tabbar__icon">
-        <img src="./images/icon_nav_cell.png" alt="">
-      </div>
-      <p class="weui-tabbar__label">我</p>
-    </a>
-  </div> -->
 
+  <!-- heath-analyse -->
+  <section class="heath-analyse">
+    <h3 class="head-title">健康分析</h3>
+    <div class="weui-flex">
+      <div class="weui-flex__item text-center">
+        <p>BMI</p>
+        <p>22.1</p>
+      </div>
+      <div class="weui-flex__item text-center">
+        <p>标准体重</p>
+        <p>121.2</p>
+      </div>
+      <div class="weui-flex__item text-center">
+        <p>完美体重</p>
+        <p>125</p>
+      </div>
+    </div>
+    <a href="javascript:void(0);" class="more-row">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- special-column -->
+  <section class="special-column">
+    <h3 class="head-title">专栏</h3>
+    <div class="my-flex">
+      <div class="my-flex__item text-center special-sports">
+        <p>运动计划</p>
+        <p>Sports plan</p>
+      </div>
+      <div class="my-flex__item text-center special-diet">
+        <p>饮食推荐</p>
+        <p>Diet recommendation</p>
+      </div>
+    </div>
+    <div class="my-flex">
+      <div class="my-flex__item text-center special-health">
+        <p>健康常识</p>
+        <p>Health knowledge</p>
+      </div>
+      <div class="my-flex__item text-center special-expert">
+        <p>专家建议</p>
+        <p>Expert advice</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <p>本产品分析结果仅供参考，不应成为诊断或治疗疾病的最终依据。</p>
+    <div class="weui-footer">
+      <p class="weui-footer__text">Copyright © 10wfans.com </p>
+    </div>
+  </footer>
+
+  <!-- tabbar -->
+  <div class="weui-tabbar">
+    <a href="javascript:;" class="weui-tabbar__item tab-active">
+      <div class="weui-tabbar__icon tab-icon">
+      </div>
+      <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon tab-icon tab-icon1">
+      </div>
+      <p class="weui-tabbar__label">附近的秤</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon tab-icon tab-icon2">
+      </div>
+      <p class="weui-tabbar__label">我要PK</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon tab-icon tab-icon3">
+      </div>
+      <p class="weui-tabbar__label">我的</p>
+    </a>
+  </div>
   <!-- script -->
   <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
@@ -180,7 +348,7 @@
       // swiper
       $('.swiper-container').swiper({
           loop: true,
-          pagination: '.pagination',
+          pagination: '.pagination'
       });
 
       // history-weight
@@ -193,7 +361,6 @@
                 fontSize: 16,
                 fontWeight: '500'
               },
-              link: '',
               top: 8,
               left: 8
           },
@@ -311,7 +478,7 @@
       };
       myChart.setOption(option);
 
-      $('#row').addClass('rote90');
+      $('#row').addClass('rote90'); //row动画
     });
   </script>
 </body>
