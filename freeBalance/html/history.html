@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../css/base.css">
+  <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <title>历史体重</title>
+  <style type="text/css">
+    .history-item {
+      width: 17.25rem;
+      height: 5rem;
+      margin: 0.75rem auto 0;
+      padding: 0.3rem;
+      font-size: 0.65rem;
+      color: #666;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #fff;
+    }
+    /*匹配ihpone5*/
+    @media only screen and (max-width: 374px) {
+      .history-item {
+        width: 15rem;
+      }
+    }
+    .history-item .weui-flex {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid #dcdcdc;
+    }
+    .history-item .weui-flex__item:nth-child(2) {
+      border-left: 1px solid #dcdcdc;
+      border-right: 1px solid #dcdcdc;
+    }
+    #historyTime {
+      padding-left: 1.35rem;
+      background: url(../img/history-icon.png) no-repeat;
+      background-size: 1.1rem;
+    }
+    #historyWeight, #historyBmi {
+      font-size: 0.9rem;
+      color: #000;
+    }
+    #historyDesc {
+      color: #000;
+      font-size: 12px;
+    }
+    #historyAddress {
+      padding-left: 1.15rem;
+      background: url(../img/history01.png) 2% no-repeat;
+      background-size: 0.6rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- container -->
+  <div class="container">
+    <div class="history-item">
+      <p id="historyTime">2018-03-05</p>
+      <div class="weui-flex text-center">
+        <div class="weui-flex__item">
+          <p id="historyWeight">120.2</p>
+          <p>体重(斤)</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyBmi">21.2</p>
+          <p>BMI</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyDesc">您太胖了，少吃点油腻的</p>
+        </div>
+      </div>
+      <p id="historyAddress">龙岗区坪地坪西东兴路2号</p>
+    </div>
+    <div class="history-item">
+      <p id="historyTime">2018-03-04</p>
+      <div class="weui-flex text-center">
+        <div class="weui-flex__item">
+          <p id="historyWeight">120.2</p>
+          <p>体重(斤)</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyBmi">21.2</p>
+          <p>BMI</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyDesc">您太胖了，少吃点油腻的</p>
+        </div>
+      </div>
+      <p id="historyAddress">龙岗区坪地坪西东兴路2号</p>
+    </div>
+    <div class="history-item">
+      <p id="historyTime">2018-03-03</p>
+      <div class="weui-flex text-center">
+        <div class="weui-flex__item">
+          <p id="historyWeight">120.2</p>
+          <p>体重(斤)</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyBmi">21.2</p>
+          <p>BMI</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyDesc">您太胖了，少吃点油腻的</p>
+        </div>
+      </div>
+      <p id="historyAddress">龙岗区坪地坪西东兴路2号</p>
+    </div>
+    <div class="history-item">
+      <p id="historyTime">2018-03-02</p>
+      <div class="weui-flex text-center">
+        <div class="weui-flex__item">
+          <p id="historyWeight">120.2</p>
+          <p>体重(斤)</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyBmi">21.2</p>
+          <p>BMI</p>
+        </div>
+        <div class="weui-flex__item">
+          <p id="historyDesc">您太胖了，少吃点油腻的</p>
+        </div>
+      </div>
+      <p id="historyAddress">龙岗区坪地坪西东兴路2号</p>
+    </div>
+  </div>
+
+  <!-- script -->
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../css/base.css">
+  <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <title>健康分析</title>
+  <style type="text/css">
+    /*header*/
+    .my-header {
+      height: 9.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 0.5rem;
+      background: #fff;
+    }
+    .profile {
+      margin-top: 0.75rem;
+    }
+    .profile .head-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    .userName {
+      margin-top: 0.3rem;
+    }
+    .my-header .weui-flex {
+      margin-top: 0.6rem;
+      width: 17.6rem;
+    }
+    .my-header .weui-flex__item {
+      font-size: 0.75rem;
+      color: #222;
+    }
+    .my-header .weui-flex__item p:first-child {
+      color: #888;
+    }
+    .my-header .weui-flex__item:nth-child(2) {
+      border-left: 1px solid #999;
+      border-right: 1px solid #999;
+    }
+    /*standard-weight*/
+    .standard-weight {
+      margin: 0.75rem 0;
+      padding-top: 0.4rem;
+      background: #28b3ea;
+      height: 9.65rem;
+      font-size: 0.7rem;
+      color: #fff;
+    }
+    .standard-weight p:first-child {
+      font-size: 0.8rem
+    }
+    .standard-weight .standard p, .standard-weight .perfect p {
+      font-size: 0.75rem;
+    }
+    .standard-weight .standard-data {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 0.75rem;
+      font-weight: 300;
+    }
+    .standard-weight ul {
+      margin-top: 0.55rem;
+    }
+    .weui-panel {
+      margin-top: 0.75rem;
+    }
+    /*diet-recommend sport-recommend*/
+    .diet-recommend .weui-media-box__hd,
+    .sport-recommend .weui-media-box__hd {
+      width: 6.45rem;
+      height: 6.75rem;
+    }
+    .diet-recommend .weui-media-box_appmsg,
+    .sport-recommend .weui-media-box_appmsg {
+      -webkit-align-items: initial;
+      align-items: initial;
+      overflow: hidden;
+    }
+    .diet-recommend .weui-media-box__bd .weui-media-box__desc,
+    .sport-recommend .weui-media-box__bd .weui-media-box__desc {
+      font-size: 0.75rem;
+      color: #888;
+      overflow: initial;
+      text-overflow: inherit;
+      display: inherit;
+      line-height: 1.3;
+      -webkit-line-clamp: inherit;
+    }
+    .diet-recommend .weui-media-box__bd .weui-media-box__title,
+    .sport-recommend .weui-media-box__bd .weui-media-box__title {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #28b3ea;
+    }
+    .sport-recommend {
+      margin-bottom: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="my-header">
+    <div class="profile">
+      <img src="../img/analyse_03.jpg" class="head-photo">
+    </div>
+    <p class="userName">简笔画</p>
+    <div class="weui-flex text-center">
+      <div class="weui-flex__item">
+        <p>身高(cm)</p>
+        <p>170</p>
+      </div>
+      <div class="weui-flex__item">
+        <p>体重(斤)</p>
+        <p>120.2</p>
+      </div>
+      <div class="weui-flex__item">
+        <p>BMI</p>
+        <p>21.2</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- standard-weight -->
+  <section>
+    <div class="standard-weight">
+      <p class="text-center">标准身材指标</p>
+      <div class="standard-data">
+        <div class="standard">
+          <p class="text-center">标准体重</p>
+          <ul>
+            <li>体重：120.1斤</li>
+            <li>胸围：91cm</li>
+            <li>腰围：70cm</li>
+            <li>臀围：93cm</li>
+          </ul>
+        </div>
+        <div class="perfect">
+          <p class="text-center">完美体重</p>
+          <ul>
+            <li>体重：130.1斤</li>
+            <li>胸围：86cm</li>
+            <li>腰围：65cm</li>
+            <li>臀围：83cm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- diet-recommend -->
+  <div class="diet-recommend weui-panel weui-panel_access">
+    <div class="weui-panel__bd">
+      <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+          <img class="weui-media-box__thumb" src="../img/analyse_07.jpg">
+        </div>
+        <div class="weui-media-box__bd">
+          <h4 class="weui-media-box__title">饮食建议</h4>
+          <p id="dietRecommendDesc" class="weui-media-box__desc">三餐按时就餐，尽量多增加饮食的样性。多喝水，鱼虾、牲畜肉类适量。多吃豆（奶）制品食物、蔬菜瓜果补充蛋白质和维生素。</p>
+        </div>
+      </a>
+    </div>
+  </div>  
+
+  <!-- sport-recommend -->
+  <div class="sport-recommend weui-panel weui-panel_access">
+    <div class="weui-panel__bd">
+      <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+          <img class="weui-media-box__thumb" src="../img/analyse_10.jpg">
+        </div>
+        <div class="weui-media-box__bd">
+          <h4 class="weui-media-box__title">运动建议</h4>
+          <p id="sportRecommendDesc" class="weui-media-box__desc">根据自身的实际情况选择合适的运动项目，保持一定的运动量。每周运动量不少于5天，每天不少于30分钟，以每天60分钟为佳。</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- script -->
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>
