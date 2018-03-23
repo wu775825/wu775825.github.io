@@ -43,7 +43,7 @@
       top: 87%;
       width: 206px;
       height: 30px;
-      transition: transform .6s;
+      transition: transform .8s;
     }
     .my-header {
       position: relative;
@@ -315,7 +315,7 @@
 
   <!-- tabbar -->
   <div class="weui-tabbar">
-    <a href="javascript:;" class="weui-tabbar__item tab-active">
+    <a href="index.html" class="weui-tabbar__item tab-active">
       <div class="weui-tabbar__icon tab-icon">
       </div>
       <p class="weui-tabbar__label">首页</p>
@@ -325,12 +325,12 @@
       </div>
       <p class="weui-tabbar__label">附近的秤</p>
     </a>
-    <a href="javascript:;" class="weui-tabbar__item">
+    <a href="pk.html" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon2">
       </div>
       <p class="weui-tabbar__label">我要PK</p>
     </a>
-    <a href="javascript:;" class="weui-tabbar__item">
+    <a href="person.html" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon3">
       </div>
       <p class="weui-tabbar__label">我的</p>
@@ -478,6 +478,14 @@
       myChart.setOption(option);
 
       $('#row').addClass('rote90'); //row动画
+
+      // special-column click
+      $('.special-sports').click(function () {
+        location.href = 'specialColumnS.html';
+      });
+      $('.special-diet').click(function () {
+        location.href = 'specialColumnD.html';
+      });
     });
   </script>
 </body>

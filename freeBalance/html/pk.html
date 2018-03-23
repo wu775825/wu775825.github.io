@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../css/base.css">
+  <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <title>健康分析</title>
+  <style type="text/css">
+    /*tabbar*/
+    .tab-icon {
+      background: url(../img/tabicon.png) 0px 0px no-repeat;
+      background-size: cover;
+    }
+    .tab-icon1 {
+      background-position: -27px 0;
+    }
+    .tab-icon2 {
+      background-position: -54px 0;
+    }
+    .tab-icon3 {
+      background-position: -81px 0;
+    }
+    .tab-active .weui-tabbar__label {
+      color: #3da2d5;
+    }
+    .tab-active .tab-icon {
+      background-position: -162px 0;
+    }
+    /*header*/
+    .my-header {
+      height: 9.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 0.5rem;
+      background: #fff;
+    }
+    .profile {
+      margin-top: 0.75rem;
+    }
+    .profile .head-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    .userName {
+      margin-top: 0.3rem;
+      color: #555;
+    }
+    .my-header .weui-flex {
+      margin-top: 0.6rem;
+      width: 17.6rem;
+    }
+    .my-header .weui-flex__item {
+      font-size: 0.75rem;
+      color: #222;
+    }
+    .my-header .weui-flex__item p:first-child {
+      color: #888;
+    }
+    .my-header .weui-flex__item:nth-child(2) {
+      border-left: 1px solid #999;
+      border-right: 1px solid #999;
+    }
+    /*rank list*/
+    .rank-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0.75rem;
+      padding-top: 0.4rem;
+      background: #fff;
+      overflow: hidden;
+    }
+    .rank-container .weui-flex {
+      width: 17.6rem;
+    }
+    .rank-list .userPhoto {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+    .rank-list li {
+      height: 3.1rem;
+      font-size: 0.8rem;
+      color: #555;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .rank-list li.weui-flex {
+      align-items: center;
+    }
+    .name-head, .score-head, .rank-head {
+      padding: 0.45rem;
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 300;
+    }
+    .name-head {
+      background: #61b2ff;
+      border-radius: 4px 0px 0px 4px;
+    }
+    .score-head {
+      background: #ff9a9c;
+    }
+    .rank-head {
+      background: #76c867;
+      border-radius: 0px 4px 4px 0px;
+    }
+    .nicknameAndImg {
+      display: flex;
+    }
+    .nicknameAndImg .userPhoto {
+      margin: 0 8px;
+    }
+    .nickname {
+      width: 3.5rem;
+      font-size: 0.7rem;
+      line-height: 1.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    @media only screen and (max-width: 360px) {
+      .rank-container .weui-flex {
+        width: 15.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="my-header">
+    <div class="profile">
+      <img src="../img/analyse_03.jpg" class="head-photo">
+    </div>
+    <p class="userName">简笔画</p>
+    <div class="weui-flex text-center">
+      <div class="weui-flex__item">
+        <p>得分</p>
+        <p>88.1</p>
+      </div>
+      <div class="weui-flex__item">
+        <p>打败人数</p>
+        <p>15245</p>
+      </div>
+      <div class="weui-flex__item">
+        <p>总人数</p>
+        <p>212311</p>
+      </div>
+    </div>
+  </header>
+  <!-- rank list -->
+  <section class="rank-container">
+    <div class="weui-flex text-center">
+      <div class="name-head weui-flex__item">昵称</div>
+      <div class="score-head weui-flex__item">得分</div>
+      <div class="rank-head weui-flex__item">排名</div>
+    </div>
+    <ul class="rank-list">
+      <li class="weui-flex text-center">
+        <div class="nicknameAndImg weui-flex__item">
+          <img src="../img/2.jpg" class="userPhoto">
+          <span class="nickname">...king</span>
+        </div>
+        <div class="userScore weui-flex__item">88.1</div>
+        <div class="userRank weui-flex__item">3</div>
+      </li>
+      <li class="weui-flex text-center">
+        <div class="nicknameAndImg weui-flex__item">
+          <img src="../img/3.jpg" class="userPhoto">
+          <span class="nickname">空间的发挥</span>
+        </div>
+        <div class="userScore weui-flex__item">99.1</div>
+        <div class="userRank weui-flex__item">1</div>
+      </li>
+      <li class="weui-flex text-center">
+        <div class="nicknameAndImg weui-flex__item">
+          <img src="../img/4.jpg" class="userPhoto">
+          <span class="nickname">空间</span>
+        </div>
+        <div class="userScore weui-flex__item">98.1</div>
+        <div class="userRank weui-flex__item">2</div>
+      </li>
+      <li class="weui-flex text-center">
+        <div class="nicknameAndImg weui-flex__item">
+          <img src="../img/5.jpg" class="userPhoto">
+          <span class="nickname">空间的发挥</span>
+        </div>
+        <div class="userScore weui-flex__item">97.1</div>
+        <div class="userRank weui-flex__item">3</div>
+      </li>
+      <li class="weui-flex text-center">
+        <div class="nicknameAndImg weui-flex__item">
+          <img src="../img/6.jpg" class="userPhoto">
+          <span class="nickname">空间的发挥</span>
+        </div>
+        <div class="userScore weui-flex__item">96.1</div>
+        <div class="userRank weui-flex__item">4</div>
+      </li>
+    </ul>
+  </section>
+  
+  
+  <!-- tabbar -->
+  <div class="weui-tabbar">
+    <a href="index.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon tab-icon">
+      </div>
+      <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon tab-icon tab-icon1">
+      </div>
+      <p class="weui-tabbar__label">附近的秤</p>
+    </a>
+    <a href="pk.html" class="weui-tabbar__item tab-active">
+      <div class="weui-tabbar__icon tab-icon tab-icon2">
+      </div>
+      <p class="weui-tabbar__label">我要PK</p>
+    </a>
+    <a href="person.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon tab-icon tab-icon3">
+      </div>
+      <p class="weui-tabbar__label">我的</p>
+    </a>
+  </div>
+
+  <!-- script -->
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

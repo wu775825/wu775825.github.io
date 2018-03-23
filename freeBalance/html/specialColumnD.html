@@ -11,11 +11,11 @@
   <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <title>运动计划</title>
+  <title>饮食推荐</title>
   <style type="text/css">
-    .container {
+    /*.container {
       padding-top: 2.4rem;
-    }
+    }*/
     .my-navbar .weui-navbar__item {
       padding: 0.6rem;
     }
@@ -47,6 +47,11 @@
     .title {
       font-size: 1.2rem;
     }
+    .weui-navbar__item.weui-bar__item--on {
+      color: #3da2d5;
+      background-color: #fff;
+      border-bottom: 1px solid #3da2d5;
+    }
     /*匹配ihpone5*/
     @media only screen and (max-width: 374px) {
       .article-item {
@@ -64,59 +69,181 @@
 <body>
   <!-- navbar -->
   <nav class="my-navbar">
-    <div class="weui-navbar">
-      <div class="weui-navbar__item weui_bar__item_on">
-        早餐
+    <div class="weui-tab">
+      <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+          早餐
+        </a>
+        <a class="weui-navbar__item" href="#tab2">
+          中餐
+        </a>
+        <a class="weui-navbar__item" href="#tab3">
+          晚餐
+        </a>
+        <a class="weui-navbar__item" href="#tab4">
+          素食
+        </a>
       </div>
-      <div class="weui-navbar__item">
-        中餐
-      </div>
-      <div class="weui-navbar__item">
-        晚餐
-      </div>
-      <div class="weui-navbar__item">
-        素食
+      <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+          <!-- container -->
+            <div class="container">
+              <ul>
+                <li class="article-item">
+                  <img src="../img/specialColumn01.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头1</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn02.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+          <!-- container -->
+            <div class="container">
+              <ul>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头2</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+        <div id="tab3" class="weui-tab__bd-item">
+          <!-- container -->
+            <div class="container">
+              <ul>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头3</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+        <div id="tab4" class="weui-tab__bd-item">
+          <!-- container -->
+            <div class="container">
+              <ul>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头4</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+                <li class="article-item">
+                  <img src="../img/specialColumn03.jpg">
+                  <div class="mask"></div>
+                  <div class="article-title text-center">
+                    <p class="title">无糖胡萝卜泥馒头</p>
+                    <p class="subtitle">Steamed bun with sugar free carrot</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
       </div>
     </div>
   </nav>
-
-  <!-- container -->
-  <div class="container">
-    <ul>
-      <li class="article-item">
-        <img src="../img/specialColumnS01.jpg">
-        <div class="mask"></div>
-        <div class="article-title text-center">
-          <p class="title">无糖胡萝卜泥馒头</p>
-          <p class="subtitle">Steamed bun with sugar free carrot</p>
-        </div>
-      </li>
-      <li class="article-item">
-        <img src="../img/specialColumnS01.jpg">
-        <div class="mask"></div>
-        <div class="article-title text-center">
-          <p class="title">无糖胡萝卜泥馒头</p>
-          <p class="subtitle">Steamed bun with sugar free carrot</p>
-        </div>
-      </li>
-      <li class="article-item">
-        <img src="../img/specialColumnS01.jpg">
-        <div class="mask"></div>
-        <div class="article-title text-center">
-          <p class="title">无糖胡萝卜泥馒头</p>
-          <p class="subtitle">Steamed bun with sugar free carrot</p>
-        </div>
-      </li>
-      <li class="article-item">
-        <img src="../img/specialColumnS01.jpg">
-        <div class="mask"></div>
-        <div class="article-title text-center">
-          <p class="title">无糖胡萝卜泥馒头</p>
-          <p class="subtitle">Steamed bun with sugar free carrot</p>
-        </div>
-      </li>
-    </ul>
-  </div>
 
   <!-- script -->
   <script type="text/javascript" src="../js/jquery.min.js"></script>
