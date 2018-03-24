@@ -53,6 +53,12 @@ ul li {
   font-weight: 500;
 }
 
+.jbh-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /*animation*/
 .rote90 {
   transform: rotate(94deg);

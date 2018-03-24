@@ -11,31 +11,8 @@
   <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <title>我的</title>
+  <title>信息修改</title>
   <style type="text/css">
-    body {
-      margin-bottom: 53px;
-    }
-    /*tabbar*/
-    .tab-icon {
-      background: url(../img/tabicon.png) 0px 0px no-repeat;
-      background-size: cover;
-    }
-    .tab-icon1 {
-      background-position: -27px 0;
-    }
-    .tab-icon2 {
-      background-position: -54px 0;
-    }
-    .tab-icon3 {
-      background-position: -81px 0;
-    }
-    .tab-active .weui-tabbar__label {
-      color: #3da2d5;
-    }
-    .tab-active .tab-icon {
-      background-position: -108px 0;
-    }
     /*header*/
     .my-header {
       height: 6.75rem;
@@ -73,34 +50,17 @@
     .user-info span.weui-cell__ft {
       margin-left: 6px;
     }
-    .user-info div.weui-cell__ft, .user-info span.weui-cell__ft {
-      padding-right: 30px;
+    .toolbar .title {
+      background: #28b3ea;
+      color: #fff;
     }
-    .user-info div.height {
-      padding-right: 0;
+    .toolbar .picker-button {
+      color: #fff;
     }
     #btn-save {
       margin-top: 1.5rem;
       width: 95%;
       background: #28b3ea;
-    }
-    /*more-row*/
-    .more-row {
-      position: absolute;
-      height: 16px;
-      top: 14px;
-      right: 0;
-      left: 0;
-      background: rgba(255,255,255,0);
-    }
-    .more-row span {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      top: 0;
-      right: 6%;
-      background: url('../img/more-row.png') no-repeat;
-      background-size: cover;
     }
   </style>
 </head>
@@ -118,56 +78,24 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">性别</div>
       <div class="weui-cell__ft">
-        <input id="sex" class="weui-input" type="text" value="男" disabled="disabled" readonly="">
+        <input id="sex" class="weui-input" type="text" value="">
       </div>
-      <a href="./changePerson.html" class="more-row">
-        <span></span>
-      </a>
     </div>
     <div class="weui-cell">
       <div class="weui-cell__bd">年龄</div>
       <div class="weui-cell__ft">
-        <input class="weui-input" type="text" value="24岁" disabled="disabled" readonly="">
+        <input id="age" class="weui-input" type="text" value="22岁">
       </div>
-      <a href="./changePerson.html" class="more-row">
-        <span></span>
-      </a>
     </div>
     <div class="weui-cell">
       <div class="weui-cell__bd">身高</div>
-      <div class="weui-cell__ft height">
-        <input class="weui-input" type="text" value="170" disabled="disabled" readonly="">
+      <div class="weui-cell__ft">
+        <input class="weui-input" type="number" value="">
       </div>
       <span class="weui-cell__ft">cm</span>
-      <a href="./changePerson.html" class="more-row">
-        <span></span>
-      </a>
     </div>
   </section>
-
-  <!-- tabbar -->
-  <div class="weui-tabbar">
-    <a href="index.html" class="weui-tabbar__item tab-active">
-      <div class="weui-tabbar__icon tab-icon">
-      </div>
-      <p class="weui-tabbar__label">首页</p>
-    </a>
-    <a href="javascript:;" class="weui-tabbar__item">
-      <div class="weui-tabbar__icon tab-icon tab-icon1">
-      </div>
-      <p class="weui-tabbar__label">附近的秤</p>
-    </a>
-    <a href="pk.html" class="weui-tabbar__item">
-      <div class="weui-tabbar__icon tab-icon tab-icon2">
-      </div>
-      <p class="weui-tabbar__label">我要PK</p>
-    </a>
-    <a href="person.html" class="weui-tabbar__item">
-      <div class="weui-tabbar__icon tab-icon tab-icon3">
-      </div>
-      <p class="weui-tabbar__label">我的</p>
-    </a>
-  </div>
+  <button class="weui-btn weui-btn_primary" id="btn-save">确认修改</button>
 
   <!-- script -->
   <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -177,6 +105,25 @@
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
+      $("#sex").picker({
+        title: "请选择您的性别",
+        cols: [
+          {
+            textAlign: 'center',
+            values: ['男', '女']
+          }
+        ]
+      });
+      $("#age").picker({
+        title: "请选择您的年龄",
+        cols: [
+          {
+            textAlign: 'center',
+            values: ["5岁", "6岁", "7岁", "8岁", "9岁", "10岁", "11岁", "12岁", "13岁", "14岁", "15岁", "16岁", "17岁", "18岁", "19岁", "20岁", "21岁", "22岁", "23岁", "24岁", "25岁", "26岁", "27岁", "28岁", "29岁", "30岁", "31岁", "32岁", "33岁", "34岁", "35岁", "36岁", "37岁", "38岁", "39岁", "40岁", "41岁", "42岁", "43岁", "44岁", "45岁", "46岁", "47岁", "48岁", "49岁", "50岁", "51岁", "52岁", "53岁", "54岁", "55岁", "56岁", "57岁", "58岁", "59岁", "60岁", "61岁", "62岁", "63岁", "64岁", "65岁", "66岁", "67岁", "68岁", "69岁", "70岁", "71岁", "72岁", "73岁", "74岁", "75岁", "76岁", "77岁", "78岁", "79岁"]
+          }
+        ],
+        toolbarCloseText: '确定',
+      });
       
     });
   </script>

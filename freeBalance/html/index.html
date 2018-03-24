@@ -89,6 +89,15 @@
       flex-direction: column;
       justify-content: center;
     }
+    .person-bmi p:first-child {
+      position: relative;
+    }
+    .person-bmi img {
+      position: absolute;
+      width: 20px;
+      top: 3px;
+      right: -26px;
+    }
 
     /*swiper-pagination*/
     .pagination {
@@ -230,7 +239,7 @@
                 <p id="height">170</p>
               </div>
               <div class="weui-flex__item person-bmi color-fff text-center">
-                <p>BMI</p>
+                <p>BMI<img src="../img/help.png"></p>
                 <p id="bmi">22.1</p>
               </div>
             </div>
@@ -485,6 +494,10 @@
       });
       $('.special-diet').click(function () {
         location.href = 'specialColumnD.html';
+      });
+      // BMI说明框
+      $('.person-bmi p:first-child').click(function () {
+        $.alert("身体质量指数(BMI)是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准", "BMI");
       });
     });
   </script>
