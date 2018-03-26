@@ -155,7 +155,7 @@
   <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/swiper.min.js"></script>
   <script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
-  <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+  <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
@@ -281,7 +281,11 @@
           $('.refresh').click(function () {
             location.href='map.html';
           })
-    }); 
+
+          $('#topStore').on('click','div.bus-info', function() {
+              location.href='shopDetails.html?id='+$(this).attr('data-id');
+          })
+    });
   </script>
 </body>
 </html>
