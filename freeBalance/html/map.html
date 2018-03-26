@@ -73,7 +73,7 @@
       width: 100%;
       position: absolute;
       height: 70px;
-      bottom: 6%;
+      bottom: 9%;
       left: 0;
       display: flex;
       flex-flow: row wrap;
@@ -183,6 +183,7 @@
       var myGlobal = {} //局部全局对象，存储map地图对象
       var options = {timeout: 8000};
       var positionNum = 0;
+      var isFirstClick = false;
 
       function showPosition(position) {
             positionNum++;
@@ -194,11 +195,10 @@
             var map = new qq.maps.Map(document.getElementById('container'),{
                 center: new qq.maps.LatLng(lat,lng),
                 zoom: 13,
-                zoomControl: true,
                 draggable: true,//手势控制, 用来设置地图是否能够鼠标拖拽，默认值为“可以”；
                 scrollwheel: true,//用来配置地图是否能够通过鼠标滚轮操作进行放大，默认值为“可以”；
                 disableDoubleClickZoom: false, // 用来配置地图是否可以通过鼠标双击进行放大，默认值为“可以”。
-                // disableDefaultUI: true
+                disableDefaultUI: true
             });
 
             myGlobal.map = map;
@@ -253,10 +253,14 @@
                         //点击地图上的店铺图标后，顶部显示信息框（店铺地址名称）
                         qq.maps.event.addListener(logo, 'click', function(e) {
                           $('#topStore').show();
-                            console.log(this.name+','+this.address)//获取属性
-                             $('#topStore').html('<div class="bus-info" data-lat="' + this.lat + '"data-lng="' + this.lng + '" data-address="' + this.address + '" data-name="' + this.name +'" data-id="' + this.id + '"><h3 class="bus-head">'+this.name+'</h3> <p class="bus-addr"><img src="../img/history01.png"><span>'+this.address+'</span> </p></div>')
+                          // 点击图标高亮，原来的恢复初始图标
+                          if (myGlobal.LastTarget) {
+                            $(myGlobal.LastTarget).attr('src', '../img/map_on.png')
+                          }
+                          $(e.event.target).attr('src', '../img/map_on-active.png')
+                          $('#topStore').html('<div class="bus-info" data-lat="' + this.lat + '"data-lng="' + this.lng + '" data-address="' + this.address + '" data-name="' + this.name +'" data-id="' + this.id + '"><h3 class="bus-head">'+this.name+'</h3> <p class="bus-addr"><img src="../img/history01.png"><span>'+this.address+'</span> </p></div>')
+                          myGlobal.LastTarget = e.event.target;
                         });
-                            
                     }
                   })(res);
           }
