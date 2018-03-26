@@ -97,7 +97,7 @@
   <section>
     <div class="bigImg"><img src="../img/shopDetail03.jpg"/></div>
     <div class="detailsBox">
-      <img src="../img/shopDetail01.png" class="gotoImg">
+      <img  class="gotoImg" src="../img/shopDetail01.png">
       <p id="name" class="color-333">摩尔城</p>
       <div>
         <img src="../img/shopDetail-phone.png"/>
@@ -152,6 +152,17 @@
   <script type="text/javascript" src="../js/swiper.min.js"></script>
   <script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
   <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+  <script type="text/javascript" src="../js/dlc.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      //去到这导航
+      $('.gotoImg').on('click', function() {
+          console.log('sadf');
+          location.href='http://apis.map.qq.com/tools/routeplan/eword='+getUrlParam('eword')+getUrlParam('&epointx')+getUrlParam('&epointy')+'?referer=myapp&key=N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ'
+      })
+      console.log(location);
+    })
+  </script>
 </body>
 </html>
