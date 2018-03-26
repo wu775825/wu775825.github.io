@@ -43,6 +43,16 @@ ul li {
 .color-fff {
   color: #fff;
 }
+.color-999 {
+  color: #999;
+}
+.color-666 {
+  color: #666;
+}
+.color-333 {
+  color: #333;
+}
+
 .text-center {
   text-align: center;
 }

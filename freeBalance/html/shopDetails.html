@@ -16,67 +16,154 @@
     .bigImg {
       height: 7.5rem;
     }
-    .recommendTit img {
-      width: 32px;
-      height: 32px;
-    }
-    .recommendTit {
+    .hot-recommend {
       height: 1.6rem;
+      background: #fff;
+      position: relative;
+    }
+    .hot-recommend img {
+      width: 1.6rem;
+      height: 1.6rem;
+      position: absolute;
     }
     .detailsBox {
       height: 4.275rem;
+      padding: 0.75rem 0 0.375rem 0.75rem;
+      position: relative;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
       background: #fff;
+    }
+    .detailsBox img {
+      width: 0.75rem;
+      height: 0.75rem;
+      margin-right: 0.4rem;
+
+    }
+    .hot-recommend {
+      line-height: 1.6rem; 
+    }
+    #name, .hot-recommend span {
+      font-size: 0.9rem;
+      margin-right: 0.4rem;
+    }
+    .detailsBox .gotoImg {
+      width: 45px;
+      height: 45px;
+      position: absolute;
+      right: 1.8rem;
+      top: -1.15rem;
+    }
+    /*hot-recommend*/
+    .commentsImg img{
+      width: 0.35rem;
+      margin-right: 0.05rem;
+    }
+    .recommendTit{
+      height: 0.9rem;
+      line-height: 0.9rem;
+    }
+    .recommendTit img{
+      width: 0.35rem;
+      vertical-align: sub;
+    }
+    .recommendBox ul {
+      display: inline-block;
+      padding-left: 0.44rem;
+      margin-top: 0.52rem;
+    }
+    .recommendBox ul li{
+      display: inline-block;
+      float: left;
+      background: #fff;
+      width: 8.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .recommendBox ul li img{
+      width: 8.5rem;
+      height: 9.5rem;
+    }
+    @media only screen and (max-width: 366px) {
+      .recommendBox ul li{
+        width: 7.25rem;
+      }
+      .recommendBox ul li img {
+        width: 7.25rem;
+        height: 8.1rem;
+      }
+    }
+    .recommendBox ul li:nth-child(2n){
+      margin-left: 0.72rem;
+    }
+    .recommendBox ul li p{
+      padding-top: 0.2rem;
+      padding-bottom: 0.35rem;
+      color: #333;
+      font-size: 0.8rem;
+      text-align: center; 
     }
   </style>
 </head>
 <body>
   <!-- container -->
   <section>
-    <div class="bigImg"><img  alt="" /></div>
-    <div>
-      <p id="name"></p>
+    <div class="bigImg"><img src=""/></div>
+    <div class="detailsBox">
+      <img src="../img/shopDetail01.png" class="gotoImg">
+      <p id="name" class="color-333">摩尔城</p>
+      <div>
+        <img src="../img/shopDetail-phone.png"/>
+        <a href="tel:020-32658745" class="color-666 font-15" id="tel">0788-5852455</a>
+      </div>
+      <div class="color-666">
+        <img src="../img/history01.png"/><span id="address">南联地铁站斜对面</span>
+      </div>
+    </div>
+    <!--<div class="LR-block paddingTB-4 paddingLR-24 marginTop-20" id="comment">
+      <span class="color-333 font-15" id="comment_num"></span>
+      <em class="flex-center">
+        <div class="commentsImg">
+          <img src="../img/star.png"/>
+          <img src="../img/star.png"/>
+          <img src="../img/star.png"/>
+          <img src="../img/star.png"/>
+          <img src="../img/star_hui.png"/>
+        </div>
+        <div><img src="../img/arrow_right.png" class="arrow_right"/></div>
+      </em>
+    </div>-->
+    
+    <div class="hot-recommend background-fff text-center marginTop-20 font-15 color-333">
+      <span>热门推荐</span>
+      <img src="../img/shopDetail-hot.png"/>
+    </div>
+    <div class="recommendBox">
       <ul>
-        <li class="flex-center"><img src="../img/shopDetail-phone.png"/><a href="tel:020-32658745" class="color-666 font-15" id="tel"></a></li>
-        <li class="flex-center"><img src="../img/history01.png" class="marginRight-20"/><span class="color-666 font-15" id="address"></span></li>
+        <li>
+          <img src="../img/shopDetail02.jpg"/>
+          <p>儿童健康成长体验</p>
+        </li>
+        <li>
+          <img src="../img/shopDetail02.jpg"/>
+          <p>儿童健康成长体验</p>
+        </li><li>
+          <img src="../img/shopDetail02.jpg"/>
+          <p>儿童健康成长体验</p>
+        </li><li>
+          <img src="../img/shopDetail02.jpg"/>
+          <p>儿童健康成长体验</p>
+        </li>
       </ul>
     </div>
   </section>
-
-  <!--<div class="LR-block paddingTB-4 paddingLR-24 marginTop-20" id="comment">
-    <span class="color-333 font-15" id="comment_num"></span>
-    <em class="flex-center">
-      <div class="commentsImg">
-        <img src="../img/star.png"/>
-        <img src="../img/star.png"/>
-        <img src="../img/star.png"/>
-        <img src="../img/star.png"/>
-        <img src="../img/star_hui.png"/>
-      </div>
-      <div><img src="../img/arrow_right.png" class="arrow_right"/></div>
-    </em>
-  </div>-->
-  
-  <div class="recommendTit background-fff text-center marginTop-20 font-15 color-333">
-    <img src="../img/shopDetail-hot.png"/><span class="marginLR-20">热门推荐</span>
-  </div>
-  <div class="recommendBox">
-    <ul>
-      <!--<li>
-        <img src="../img/bg1.png" alt="" />
-        <p>儿童健康成长体验</p>
-      </li>
-      <li>
-        <img src="../img/bg1.png" alt="" />
-        <p>儿童健康成长体验</p>
-      </li>-->
-    </ul>
-  </div>
 
   <!-- script -->
   <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
   <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+  <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
   <script type="text/javascript" src="../js/main.js"></script>
 </body>
 </html>
