@@ -285,10 +285,10 @@
           $('#topStore').on('click','div.bus-info', function() {
               var strHref = '';
               strHref += 'shopDetails.html?'
-              strHref += 'eword='+$(this).data('name')
+              strHref += 'id='+$(this).attr('data-id')
+              strHref += '&eword='+$(this).data('name')
               strHref += '&epointx='+$(this).data('lng')
               strHref += '&epointy='+$(this).data('lat')
-              strHref += 'id='+$(this).attr('data-id')
               location.href=strHref;
           })
     });

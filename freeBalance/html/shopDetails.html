@@ -158,8 +158,9 @@
     $(function () {
       //去到这导航
       $('.gotoImg').on('click', function() {
-          console.log('sadf');
-          location.href='http://apis.map.qq.com/tools/routeplan/eword='+getUrlParam('eword')+getUrlParam('&epointx')+getUrlParam('&epointy')+'?referer=myapp&key=N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ'
+          var strHref = 'http://apis.map.qq.com/tools/routeplan/eword='+getUrlParam('eword')+'&epointx='+getUrlParam('epointx')+'&epointy='+getUrlParam('epointy')+'?referer=myapp&key=N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ'
+          console.log(strHref);
+          location.href = strHref
       })
       console.log(location);
     })
