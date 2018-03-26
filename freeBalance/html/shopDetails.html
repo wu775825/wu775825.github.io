@@ -11,19 +11,36 @@
   <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <link rel="stylesheet" href="../css/zy_common.css" />
-  <link rel="stylesheet" href="../css/zy_base.css" />
   <title>附近的秤</title>
+  <style type="text/css">
+    .bigImg {
+      height: 7.5rem;
+    }
+    .recommendTit img {
+      width: 32px;
+      height: 32px;
+    }
+    .recommendTit {
+      height: 1.6rem;
+    }
+    .detailsBox {
+      height: 4.275rem;
+      background: #fff;
+    }
+  </style>
 </head>
 <body>
-  <div class="bigImg"><img  alt="" /></div>
-  <div class="background-fff detailsBox paddingTB-3 paddingLR-24">
-    <p class="marginBottom-20 font-16 color-333" id="name"></p>
-    <ul>
-      <li class="marginBottom-20 flex-center"><img src="../img/tel.png" class="marginRight-20"/><a href="tel:020-32658745" class="color-666 font-15" id="tel"></a></li>
-      <li class="flex-center"><img src="../img/s_location.png" class="marginRight-20"/><span class="color-666 font-15" id="address"></span></li>
-    </ul>
-  </div>
+  <!-- container -->
+  <section>
+    <div class="bigImg"><img  alt="" /></div>
+    <div>
+      <p id="name"></p>
+      <ul>
+        <li class="flex-center"><img src="../img/shopDetail-phone.png"/><a href="tel:020-32658745" class="color-666 font-15" id="tel"></a></li>
+        <li class="flex-center"><img src="../img/history01.png" class="marginRight-20"/><span class="color-666 font-15" id="address"></span></li>
+      </ul>
+    </div>
+  </section>
 
   <!--<div class="LR-block paddingTB-4 paddingLR-24 marginTop-20" id="comment">
     <span class="color-333 font-15" id="comment_num"></span>
@@ -40,7 +57,7 @@
   </div>-->
   
   <div class="recommendTit background-fff text-center marginTop-20 font-15 color-333">
-    <img src="../img/today.png"/><span class="marginLR-20">热门推荐</span><img src="../img/more.png" alt="" />
+    <img src="../img/shopDetail-hot.png"/><span class="marginLR-20">热门推荐</span>
   </div>
   <div class="recommendBox">
     <ul>
