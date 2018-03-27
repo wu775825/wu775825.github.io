@@ -124,15 +124,15 @@
     <div class="weui-flex text-center">
       <div class="weui-flex__item">
         <p>身高(cm)</p>
-        <p>170</p>
+        <p id="height">--</p>
       </div>
       <div class="weui-flex__item">
         <p>体重(斤)</p>
-        <p>120.2</p>
+        <p id="weight">--</p>
       </div>
       <div class="weui-flex__item">
         <p>BMI</p>
-        <p>21.2</p>
+        <p id="bmi">--</p>
       </div>
     </div>
   </header>
@@ -200,5 +200,30 @@
   <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/swiper.min.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $.ajax({ //请求体重等数据
+        type:"post",
+        data:{
+          api_name:'getHealth',
+          openid:localStorage.getItem('wx_openid'),
+          id:localStorage.getItem('hid')
+        },
+        url: location.origin + '/freeBalance/mock/getHealth.json',
+        dataType:'json',
+        success: function (data) {
+          console.log(data);
+          var res = data.data;
+          if(data.code === 1){
+            $('#height').text(res.height);
+            $('#weight').text(res.weight * 2);
+            $('#bmi').text((res.fat === null ? '--':res.fat)); // fat就是BMI字段
+          } else {
+            console.log('request error: status code ' + data.code);
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

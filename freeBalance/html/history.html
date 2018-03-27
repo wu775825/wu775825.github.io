@@ -10,12 +10,13 @@
   <link rel="stylesheet" type="text/css" href="../css/base.css">
   <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/dropload.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
   <title>历史体重</title>
   <style type="text/css">
     .history-item {
       width: 17.25rem;
-      height: 5rem;
+      max-height: 142px;
       margin: 0.75rem auto 0;
       padding: 0.3rem;
       font-size: 0.65rem;
@@ -66,91 +67,7 @@
 <body>
   <!-- container -->
   <div class="container">
-    <div class="history-item">
-      <p class="historyTime">2018-03-05</p>
-      <div class="weui-flex text-center">
-        <div class="weui-flex__item">
-          <p class="historyWeight">120.2</p>
-          <p>体重(斤)</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyBmi">21.2</p>
-          <p>BMI</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyDesc">您太胖了，少吃点油腻的</p>
-        </div>
-      </div>
-      <p class="historyAddress jbh-ellipsis">龙岗区坪地坪西东兴路2号</p>
-    </div>
-    <div class="history-item">
-      <p class="historyTime">2018-03-04</p>
-      <div class="weui-flex text-center">
-        <div class="weui-flex__item">
-          <p class="historyWeight">120.2</p>
-          <p>体重(斤)</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyBmi">21.2</p>
-          <p>BMI</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyDesc">您太胖了，少吃点油腻的</p>
-        </div>
-      </div>
-      <p class="historyAddress jbh-ellipsis">龙岗区坪地坪西东兴路2号</p>
-    </div>
-    <div class="history-item">
-      <p class="historyTime">2018-03-03</p>
-      <div class="weui-flex text-center">
-        <div class="weui-flex__item">
-          <p class="historyWeight">120.2</p>
-          <p>体重(斤)</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyBmi">21.2</p>
-          <p>BMI</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyDesc">您太胖了，少吃点油腻的</p>
-        </div>
-      </div>
-      <p class="historyAddress jbh-ellipsis">龙岗区坪地坪西东兴路2号</p>
-    </div>
-    <div class="history-item">
-      <p class="historyTime">2018-03-02</p>
-      <div class="weui-flex text-center">
-        <div class="weui-flex__item">
-          <p class="historyWeight">120.2</p>
-          <p>体重(斤)</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyBmi">21.2</p>
-          <p>BMI</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyDesc">您太胖了，少吃点油腻的</p>
-        </div>
-      </div>
-      <p class="historyAddress jbh-ellipsis">龙岗区坪地坪西东兴路2号</p>
-    </div>
-    <div class="history-item">
-      <p class="historyTime">2018-03-01</p>
-      <div class="weui-flex text-center">
-        <div class="weui-flex__item">
-          <p class="historyWeight">120.2</p>
-          <p>体重(斤)</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyBmi">21.2</p>
-          <p>BMI</p>
-        </div>
-        <div class="weui-flex__item">
-          <p class="historyDesc">您太胖了，少吃点油腻的</p>
-        </div>
-      </div>
-      <p class="historyAddress jbh-ellipsis">龙岗区坪地坪西东兴路2号</p>
-    </div>
+    <div class="historyList"></div>
   </div>
 
   <!-- script -->
@@ -158,6 +75,81 @@
   <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
   <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/dropload.min.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      // 页数
+       var page = 0;
+      // 每页展示10个
+       var size = 10;
+
+       // dropload
+       $('.container').dropload({
+           scrollArea : window,
+           domDown : {
+               domClass   : 'dropload-down',
+               domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+               domLoad    : '<div class="dropload-load"><span class="loadings"></span>加载中...</div>',
+               domNoData  : '<div class="dropload-noData">暂无数据</div>'
+           },
+           loadDownFn : function(me){
+               page++;
+               // 拼接HTML
+               var result = '';
+               $.ajax({
+                type: 'POST',
+                data:{
+                  api_name: 'healthList',
+                  page: page,
+                  pagesize: size,
+                  openid:localStorage.getItem('wx_openid'),
+                },
+                url: location.origin + "/freeBalance/mock/healthList.json",
+                dataType: 'json',
+                success: function(data){
+                  var res = data.data.res;
+                  console.log(res);
+
+                  var arrLen = data.data.res.length;
+                  console.log(arrLen);
+                  if(arrLen > 0 && data.code === 1) {
+                    for(var i=0; i<arrLen; i++){
+                      result += '<div class="history-item">';
+                      result += '<p class="historyTime">'+ res[i].ctime +'</p>';
+                      result += '<div class="weui-flex text-center">';
+                      result += '<div class="weui-flex__item">';
+                      result += '<p class="historyWeight">'+ res[i].weight*2 +'</p>';
+                      result += '<p>体重(斤)</p></div><div class="weui-flex__item">';
+                      result += '<p class="historyBmi">'+ res[i].fat +'</p><p>BMI</p></div>';
+                      result += '<div class="weui-flex__item"><p class="historyDesc">';
+                      result += res[i].msg;
+                      result += '</p></div></div><p class="historyAddress jbh-ellipsis">';
+                      result += '龙岗区坪地坪西东兴路2号</p></div>';
+                    }
+                  } else {
+                      // 锁定
+                      me.lock();
+                      // 无数据
+                      me.noData();
+                  }
+                  // 插入数据到页面，放到最后面
+                  $('.historyList').append(result);
+                  // 每次数据插入，必须重置
+                  me.resetload();
+                  // 为了测试，延迟1秒加载
+                  // setTimeout(function(){
+                  // }, 1000);
+                },
+                error: function (xhr) {
+                  console(xhr.status);
+                }
+              });
+           },
+           threshold : 50
+       });
+      
+    });
+  </script>
 </body>
 </html>

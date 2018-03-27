@@ -1,0 +1,25 @@
+{
+  "code": 1,
+  "data": {
+    "age":"21",
+    "bmi":"43.89",
+    "ctime":"2018-03-12 11:15",
+    "fat":"21.46",
+    "headimg":"http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132",
+    "health_alert":"2",
+    "height":"174",
+    "hname":"正常",
+    "id":"3098",
+    "machine_code":"9BH000024",
+    "msg":"很棒哦！快去告诉身边的朋友吧！",
+    "number":"",
+    "score":95,
+    "set_id":"1",
+    "sex":"男",
+    "standard_fat":"14-20",
+    "standard_weight":"-21.60",
+    "v":"0.00",
+    "vip_id":"265",
+    "weight":"61.35"
+  }
+}

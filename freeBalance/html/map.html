@@ -134,23 +134,23 @@
   </div>
 
   <!-- tabbar -->
-  <div class="weui-tabbar">
-    <a href="index.html" class="weui-tabbar__item">
+  <div id="myTabbar" class="weui-tabbar">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon">
       </div>
       <p class="weui-tabbar__label">首页</p>
     </a>
-    <a href="map.html" class="weui-tabbar__item tab-active">
+    <a href="javascript:;" class="weui-tabbar__item tab-active">
       <div class="weui-tabbar__icon tab-icon tab-icon1">
       </div>
       <p class="weui-tabbar__label">附近的秤</p>
     </a>
-    <a href="pk.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon2">
       </div>
       <p class="weui-tabbar__label">我要PK</p>
     </a>
-    <a href="person.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon3">
       </div>
       <p class="weui-tabbar__label">我的</p>
@@ -198,7 +198,7 @@
             var lng = position.lng;
             var center = new qq.maps.LatLng(lat,lng);
             console.log('具体地址：' + position.addr + '经度：' + lng + '纬度'+ lat);
-            
+
             var map = new qq.maps.Map(document.getElementById('container'),{
                 center: new qq.maps.LatLng(lat,lng),
                 zoom: 13,
@@ -229,7 +229,7 @@
              marker.setIcon(markerIcon);
 
              (function (res) {
-                    console.log(res) 
+                    // console.log(res)
                     for(var i in res.data){
                         var logo1 = new qq.maps.LatLng(res.data[i].lat,res.data[i].lng);
                         //创建marker
@@ -239,7 +239,7 @@
                         });
                         //自定义标注图标 49, 57
                         var anchor = new qq.maps.Point(20, 23),
-                            size = new qq.maps.Size(129, 150),
+                            size = new qq.maps.Size(40, 46),
                             scaleSize = new qq.maps.Size(40, 46),
                             origin = new qq.maps.Point(0, 0),
                             markerIcon = new qq.maps.MarkerImage(
@@ -300,6 +300,23 @@
               strHref += '&epointy='+$(this).data('lat')
               location.href=strHref;
           })
+
+          // 底部tabbar导航事件
+          $('#myTabbar a').eq(0).click(function(){
+            location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
+          });
+
+          $('#myTabbar a').eq(1).click(function(){
+            location.href='map.html';
+          });
+
+          $('#myTabbar a').eq(2).click(function(){
+            location.href='pk.html';
+          });
+
+          $('#myTabbar a').eq(3).click(function(){
+            location.href='person.html?status=1';
+          });
     });
   </script>
 </body>

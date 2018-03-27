@@ -149,23 +149,23 @@
   </section>
 
   <!-- tabbar -->
-  <div class="weui-tabbar">
-    <a href="index.html" class="weui-tabbar__item">
+  <div id="myTabbar" class="weui-tabbar">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon">
       </div>
       <p class="weui-tabbar__label">首页</p>
     </a>
-    <a href="map.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon1">
       </div>
       <p class="weui-tabbar__label">附近的秤</p>
     </a>
-    <a href="pk.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon2">
       </div>
       <p class="weui-tabbar__label">我要PK</p>
     </a>
-    <a href="person.html" class="weui-tabbar__item tab-active">
+    <a href="javascript:;" class="weui-tabbar__item tab-active">
       <div class="weui-tabbar__icon tab-icon tab-icon3">
       </div>
       <p class="weui-tabbar__label">我的</p>
@@ -180,7 +180,22 @@
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
-      
+      // 底部tabbar导航事件
+      $('#myTabbar a').eq(0).click(function(){
+        location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
+      });
+
+      $('#myTabbar a').eq(1).click(function(){
+        location.href='map.html';
+      });
+
+      $('#myTabbar a').eq(2).click(function(){
+        location.href='pk.html';
+      });
+
+      $('#myTabbar a').eq(3).click(function(){
+        location.href='person.html?status=1';
+      });
     });
   </script>
 </body>

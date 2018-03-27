@@ -39,7 +39,7 @@
     /*header*/
     #row {
       position: absolute;
-      left: calc(50% - 105px);
+      left: calc(50% - 103px);
       top: 87%;
       width: 206px;
       height: 30px;
@@ -79,7 +79,7 @@
       font-size: 0.72rem;
       font-weight: 200;
     }
-    #height, #bmi, #oldWeight, #score {
+    #height, #bmi, .oldWeight, #score {
       font-size: 1.1rem;
     }
     .person-height, .person-bmi, 
@@ -167,7 +167,7 @@
       border-left: 1px solid #dcdcdc;
       border-right: 1px solid #dcdcdc;
     }
-    /*special-column 226*/
+    /*special-column*/
     .special-column {
       height: 11.4rem;
       background: #fff;
@@ -227,8 +227,8 @@
     <div class="arc">
       <img src="../img/row.png" id="row" class="">
       <div class="weight-info color-fff">
-        <p class="weight-type">标准</p>
-        <p><span class="weight">120.1</span><span>斤</span></p>
+        <p id="weightType" class="weight-type">--</p>
+        <p><span id="weight" class="weight">--</span><span>斤</span></p>
       </div>
     </div>
     <div class="swiper-container">
@@ -236,21 +236,21 @@
             <div class="weui-flex swiper-slide">
               <div class="weui-flex__item person-height color-fff  text-center">
                 <p>身高(cm)</p>
-                <p id="height">170</p>
+                <p id="height">--</p>
               </div>
               <div class="weui-flex__item person-bmi color-fff text-center">
                 <p>BMI<img src="../img/help.png"></p>
-                <p id="bmi">22.1</p>
+                <p id="bmi">--</p>
               </div>
             </div>
             <div class="weui-flex swiper-slide">
               <div class="weui-flex__item person-oldWeight color-fff  text-center">
                 <p>上次体重</p>
-                <p id="oldWeight">119.2斤</p>
+                <p class="oldWeight"><span id="lastWeight">--</span><span>斤</span></p>
               </div>
               <div class="weui-flex__item person-score color-fff text-center">
                 <p>得分</p>
-                <p id="score">97.1</p>
+                <p id="score">--</p>
               </div>
             </div>
         </div>
@@ -272,16 +272,16 @@
     <h3 class="head-title">健康分析</h3>
     <div class="weui-flex">
       <div class="weui-flex__item text-center">
-        <p>BMI</p>
-        <p>22.1</p>
+        <p>标准BMI</p>
+        <p id="standarBmi">--</p>
       </div>
       <div class="weui-flex__item text-center">
         <p>标准体重</p>
-        <p>121.2</p>
+        <p id="standardWeight">--</p>
       </div>
       <div class="weui-flex__item text-center">
         <p>完美体重</p>
-        <p>125</p>
+        <p id="perfectWeight">--</p>
       </div>
     </div>
     <a href="./analyse.html" class="more-row">
@@ -323,43 +323,114 @@
   </footer>
 
   <!-- tabbar -->
-  <div class="weui-tabbar">
-    <a href="index.html" class="weui-tabbar__item tab-active">
+  <div id="myTabbar" class="weui-tabbar">
+    <a href="javascript:;" class="weui-tabbar__item tab-active">
       <div class="weui-tabbar__icon tab-icon">
       </div>
       <p class="weui-tabbar__label">首页</p>
     </a>
-    <a href="map.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon1">
       </div>
       <p class="weui-tabbar__label">附近的秤</p>
     </a>
-    <a href="pk.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon2">
       </div>
       <p class="weui-tabbar__label">我要PK</p>
     </a>
-    <a href="person.html" class="weui-tabbar__item">
+    <a href="javascript:;" class="weui-tabbar__item">
       <div class="weui-tabbar__icon tab-icon tab-icon3">
       </div>
       <p class="weui-tabbar__label">我的</p>
     </a>
   </div>
+
   <!-- script -->
   <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
   <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/dlc.js"></script>
+  <script type="text/javascript" src="../js/tooltipbox.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
-      // swiper
+      // swiper轮播
       $('.swiper-container').swiper({
           loop: true,
           pagination: '.pagination'
       });
 
-      // history-weight
+      //row动画
+      $('#row').addClass('rote90');
+
+      // special-column click
+      $('.special-sports').click(function () {
+        location.href = 'specialColumnS.html';
+      });
+      $('.special-diet').click(function () {
+        location.href = 'specialColumnD.html';
+      });
+
+      // BMI说明框
+      $('.person-bmi p:first-child').click(function () {
+        $.alert("身体质量指数(BMI)是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准", "BMI");
+      });
+
+      // *迪尔西 逻辑
+      if(getUrlParam('opendid')){
+        localStorage.setItem('wx_openid',getUrlParam('opendid'));
+        localStorage.setItem('hid',getUrlParam('hid'));
+      }else{
+        console.log('opendid undefined')
+      }
+
+      $.ajax({ //请求体重等数据
+        type:"post",
+        data:{
+          api_name:'getHealth',
+          openid:localStorage.getItem('wx_openid'),
+          id:localStorage.getItem('hid')
+        },
+        url: location.origin+'/freeBalance/mock/getHealth.json',
+        dataType:'json',
+        success: function (data) {
+          // console.log(data);
+          var res = data.data;
+          if(data.code=='1'){ 
+            // $('#sex').text(res.sex);
+            // $('#age').text(res.age+'岁');
+            $('#height').text(res.height);
+            $('#weight').text(res.weight * 2);
+            $('#bmi').text((res.fat === null ? '--':res.fat)); // fat就是BMI字段
+            $('#weightType').text(res.hname === null ? '--': res.hname);  
+            $('#standardWeight').text(res.standard_weight === null ? '--':res.standard_weight*2+'斤');
+            $('#perfectWeight').text(res.standard_weight === null ? '--':res.standard_weight*2+5+'斤');
+            $('#standarBmi').text(res.standard_fat === null?'--':res.standard_fat);// 正常BMI范围
+          }
+        }
+      });
+
+      // 底部tabbar导航事件
+      $('#myTabbar a').eq(0).click(function(){
+        location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
+      });
+
+      $('#myTabbar a').eq(1).click(function(){
+        location.href='map.html';
+      });
+
+      $('#myTabbar a').eq(2).click(function(){
+        location.href='pk.html';
+      });
+
+      $('#myTabbar a').eq(3).click(function(){
+        location.href='person.html?status=1';
+      });
+
+      // 历史体重
+      // 历史体重 echarts曲线
       var myChart = echarts.init(document.getElementById('historyWeight'));
       option = {
           title: {
@@ -404,7 +475,7 @@
               axisLabel: {
                 color: '#999'
               },
-              data : ['03-01','03-02','03-03','03-04','03-05']
+              data : []
           },
           yAxis : {
               type: 'value',
@@ -458,7 +529,7 @@
                   width: 2
                 }
               },
-              data:[119.2, 119.9, 122.9, 119.5, 118.8]
+              data: []
           },
           dataZoom: [
             {
@@ -484,21 +555,59 @@
             }
           ]
       };
-      myChart.setOption(option);
 
-      $('#row').addClass('rote90'); //row动画
+      //请求健康列表(最新的前七次秤重数据)
+      $.ajax({
+        type: "post",
+        data:{
+          api_name:'healthList',
+          page: 1, // 页数
+          pagesize: 7, // 每页展示10个
+          openid:localStorage.getItem('wx_openid'),
+        },
+        url: "http://127.0.0.1/freeBalance/mock/healthList.json", 
+        dataType: 'json',
+        success: function(data){
+          console.log(data);
+          var weight = [], ctime = [];
+          if (data.code === 1) {
+            for(var i in data.data.stat){
+              weight.push(data.data.stat[i].weight * 2);
+              ctime.push(data.data.stat[i].ctime.substr(5));
+            }
+          } else {
+            $.toast("纯文本", data.code);
+          }
+          option.xAxis.data = ctime;
+          option.series.data = weight;
+          myChart.setOption(option);
+        },
+        error: function () {
+          myChart.setOption(option);
+        }
+      });
 
-      // special-column click
-      $('.special-sports').click(function () {
-        location.href = 'specialColumnS.html';
-      });
-      $('.special-diet').click(function () {
-        location.href = 'specialColumnD.html';
-      });
-      // BMI说明框
-      $('.person-bmi p:first-child').click(function () {
-        $.alert("身体质量指数(BMI)是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准", "BMI");
-      });
+      //判断健康状况
+      // function getTip(){
+      //   var Height=Number($('#Height').text())/100;
+      //   var weight=Number($('#weight').text());
+      //   var indicators=(weight/(Height*Height)).toFixed(2);
+      //   console.log(indicators)
+      //   var tipText='';
+      //   if(indicators<18.5){
+      //     tipText='偏瘦：下次多吃点再来吧！';
+      //   }else if(indicators>=18.5 && indicators<=23.9 ){
+      //     tipText='正常：很棒哦！快去告诉身边的朋友吧！';
+      //   }else if(indicators>=28 ){
+      //     tipText='肥胖：从现在开始减肥，相信自己会瘦下来！加油！';
+      //   }else if(indicators>24 && indicators <=27.9){
+      //     tipText='偏胖：少吃那么一丢丢你就是标准体重啦，加油吧！';
+      //   }else if(indicators>=24){
+      //     tipText='超重：少吃多运动很健康哦！';
+      //   }
+      //   $('#tipText').text(tipText);
+      //   return indicators;
+      // }
     });
   </script>
 </body>
