@@ -57,10 +57,18 @@
       z-index: 999;
     }
     .bus-head {
-      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #444;
     }
     .bus-info .bus-addr {
       color: #666;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .bus-addr img {
       width: 12px;
@@ -230,9 +238,9 @@
                             map: map
                         });
                         //自定义标注图标 49, 57
-                        var anchor = new qq.maps.Point(25, 58),
+                        var anchor = new qq.maps.Point(20, 23),
                             size = new qq.maps.Size(129, 150),
-                            scaleSize = new qq.maps.Size(50, 58),
+                            scaleSize = new qq.maps.Size(40, 46),
                             origin = new qq.maps.Point(0, 0),
                             markerIcon = new qq.maps.MarkerImage(
                               "../img/map-on.svg",
