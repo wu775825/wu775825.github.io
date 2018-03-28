@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <title>信息修改</title>
+  <title>注册</title>
   <style type="text/css">
     /*header*/
     .my-header {
@@ -101,20 +101,16 @@
       <span class="weui-cell__ft">cm</span>
     </div>
   </section>
-  <button class="weui-btn weui-btn_primary confirm" id="confirm">确认修改</button>
+  <button class="weui-btn weui-btn_primary confirm" id="confirm">注册</button>
 
   <!-- script -->
   <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
-  <script type="text/javascript" src="../js/echarts.min.js"></script>
-  <script type="text/javascript" src="../js/swiper.min.js"></script>
   <script type="text/javascript" src="../js/dlc.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
-
       var sex = '', off = 0;
-
       // 让height输入框失焦
       $("#sex, #age").click(function(event){
         $('#height').blur();
@@ -216,10 +212,18 @@
                   console.log(res);
                   if(res.code === 1){
                     $.hideLoading();
-                    $.toast('修改成功', 'success');
+                    $.toast('注册成功', 'success');
                     setTimeout(function(){
-                      location.replace('person.html');
-                    },2000);
+                      if(localStorage.getItem('type')=='2'){
+                        location.href='saoCode.php';
+                      }else if(localStorage.getItem('type')=='1'){
+                        location.href='index.html';
+                      }else if(localStorage.getItem('type')=='3'){
+                        location.href='report.html';
+                      }else{
+                        location.href='index.html?openid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
+                      }
+                    },1500);
                   } else {
                     off = 0;
                     $.toast(res.msg);
@@ -227,7 +231,7 @@
                 },
                 error: function () {
                   $.hideLoading();
-                  $.toptip('修改失败', 'error');
+                  $.toptip('注册失败', 'error');
                 }
               });
           }

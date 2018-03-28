@@ -1,0 +1,12 @@
+{
+    "code": 1, 
+    "msg": "获取成功！", 
+    "data": {
+        "birthday": " 2002-03-23", 
+        "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+        "id": "265", 
+        "nickname": "缺牙", 
+        "sex": "1", 
+        "tall": "76"
+    }
+}

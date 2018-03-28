@@ -237,13 +237,13 @@
                             position: logo1,
                             map: map
                         });
-                        //自定义标注图标 49, 57
-                        var anchor = new qq.maps.Point(20, 23),
-                            size = new qq.maps.Size(40, 46),
-                            scaleSize = new qq.maps.Size(40, 46),
+                        //自定义标注图标 46, 52
+                        var anchor = new qq.maps.Point(23, 52),
+                            size = new qq.maps.Size(46, 52),
+                            scaleSize = new qq.maps.Size(46, 52),
                             origin = new qq.maps.Point(0, 0),
                             markerIcon = new qq.maps.MarkerImage(
-                              "../img/map-on.svg",
+                              "../img/map-on.png",
                               size, 
                               origin,
                               anchor,
@@ -264,9 +264,9 @@
                           $('#topStore').show();
                           // 点击图标高亮，原来的恢复初始图标
                           if (myGlobal.LastTarget) {
-                            $(myGlobal.LastTarget).attr('src', '../img/map-on.svg');
+                            $(myGlobal.LastTarget).attr('src', '../img/map-on.png');
                           }
-                          $(e.event.target).attr('src', '../img/map-on-active.svg')
+                          $(e.event.target).attr('src', '../img/map-on-active.png')
                           $('#topStore').html('<div class="bus-info" data-lat="' + this.lat + '"data-lng="' + this.lng + '" data-address="' + this.address + '" data-name="' + this.name +'" data-id="' + this.id + '"><h3 class="bus-head">'+this.name+'</h3> <p class="bus-addr"><img src="../img/history01.png"><span>'+this.address+'</span> </p></div>')
                           myGlobal.LastTarget = e.event.target;
                         });

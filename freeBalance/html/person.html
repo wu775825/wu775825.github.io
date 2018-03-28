@@ -111,9 +111,9 @@
   <!-- header -->
   <header class="my-header">
     <div class="profile">
-      <img src="../img/analyse_03.jpg" class="head-photo">
+      <img src="../img/person.png" class="head-photo">
     </div>
-    <p class="userName">简笔画</p>
+    <p class="userName">--</p>
   </header>
 
   <!-- user info -->
@@ -121,7 +121,7 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">性别</div>
       <div class="weui-cell__ft">
-        <input id="sex" class="weui-input" type="text" value="男" disabled="disabled" readonly="">
+        <input id="sex" class="weui-input" type="text" value="--" disabled="disabled" readonly="">
       </div>
       <a href="./changePerson.html" class="more-row">
         <span></span>
@@ -130,7 +130,7 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">年龄</div>
       <div class="weui-cell__ft">
-        <input class="weui-input" type="text" value="24岁" disabled="disabled" readonly="">
+        <input id="age" class="weui-input" type="text" value="--" disabled="disabled" readonly="">
       </div>
       <a href="./changePerson.html" class="more-row">
         <span></span>
@@ -139,7 +139,7 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">身高</div>
       <div class="weui-cell__ft height">
-        <input class="weui-input" type="text" value="170" disabled="disabled" readonly="">
+        <input id="height" class="weui-input" type="text" value="--" disabled="disabled" readonly="">
       </div>
       <span class="weui-cell__ft">cm</span>
       <a href="./changePerson.html" class="more-row">
@@ -180,6 +180,26 @@
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
+      // 获取个人信息
+      $.ajax({
+        type:"POST",
+        data:{api_name:'getNickImg',openid:localStorage.getItem('wx_openid')},
+        url: '',
+        dataType:"json",
+        success:function(data){
+          console.log(data);  
+          if(data.code === 1){
+            $('.head-photo').attr('src',data.data.headimg);
+            $('.userName').text(data.data.nickname);
+            $('#sex').text(data.data.sex=='1'?'男':'女');
+            $('#age').text(data.data.birthday);
+            $('#height').text(data.data.tall);
+          } else {
+            $.toast(data.msg, "cancel");
+          }
+        }
+      });
+
       // 底部tabbar导航事件
       $('#myTabbar a').eq(0).click(function(){
         location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
