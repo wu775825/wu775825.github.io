@@ -1,0 +1,29 @@
+{
+  "data": {
+    "address": "南联地铁站", 
+    "comment_grade": null, 
+    "nullcomment_num": "0", 
+    "id": "39", 
+    "name": "九瓣花大健康深圳店", 
+    "phone": "0755-36873698", 
+    "pic": "http://jbhtijian.app.xiaozhuschool.com//Upload/img/2018-02-01/5a72f180a61e7.jpg", 
+    "pic_arr": [
+      {
+        "id":"908",
+        "pic":"http://jbhtijian.app.xiaozhuschool.com//Upload/img/2017-12-22/5a3cd3b7f1dff.jpg",
+        "title":"美容面膜"
+      },
+      {
+        "id":"907",
+        "pic":"http://jbhtijian.app.xiaozhuschool.com//Upload/img/2017-12-22/5a3cd3b7f1dff.jpg",
+        "title":"美容面膜"
+      }
+    ],
+    "recom_title": "美容面膜", 
+    "recom_title2": "美容面膜", 
+    "recommend": "908", 
+    "recommend2": "907"
+  }, 
+  "code": 1, 
+  "msg": "获取成功！"
+}

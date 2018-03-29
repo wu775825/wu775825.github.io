@@ -118,9 +118,9 @@
   <!-- header -->
   <header class="my-header">
     <div class="profile">
-      <img src="../img/analyse_03.jpg" class="head-photo">
+      <img src="../img/person.png" class="head-photo">
     </div>
-    <p class="userName">简笔画</p>
+    <p class="userName">--</p>
     <div class="weui-flex text-center">
       <div class="weui-flex__item">
         <p>身高(cm)</p>
@@ -145,7 +145,7 @@
         <div class="standard">
           <p class="text-center">标准体重</p>
           <ul>
-            <li>体重：120.1斤</li>
+            <li><span>体重：</span><span id="standardWeight">--</span><span>斤</span></li>
             <li>胸围：91cm</li>
             <li>腰围：70cm</li>
             <li>臀围：93cm</li>
@@ -154,7 +154,7 @@
         <div class="perfect">
           <p class="text-center">完美体重</p>
           <ul>
-            <li>体重：130.1斤</li>
+            <li><span>体重：</span><span id="perfectWeight">--</span><span>斤</span></li>
             <li>胸围：86cm</li>
             <li>腰围：65cm</li>
             <li>臀围：83cm</li>
@@ -217,7 +217,18 @@
           if(data.code === 1){
             $('#height').text(res.height);
             $('#weight').text(res.weight * 2);
+            $('.head-photo').attr('src',res.headimg);
+            $('.userName').text(res.nickname);
             $('#bmi').text((res.fat === null ? '--':res.fat)); // fat就是BMI字段
+            // 标准体重=(身高cm-100)x0.9(kg)  标准体重(女)=(身高cm-100)x0.9(kg)-2.5(kg)
+            var calc = Math.floor((res.height - 100) * 1.8);
+            if (res.sex === '男') {
+              $('#standardWeight').text(calc);
+              $('#perfectWeight').text(calc - 4);
+            } else {
+              $('#standardWeight').text(calc - 4);
+              $('#perfectWeight').text(calc - 8);
+            }
           } else {
             console.log('request error: status code ' + data.code);
           }

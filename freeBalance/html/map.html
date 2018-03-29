@@ -99,11 +99,11 @@
       text-align: center;
     }
 
-    #scanQRCode1 {
+    #nearDevice {
       width: 50%;
       text-align: center;
     }
-    #scanQRCode1 img {
+    #nearDevice img {
       width: 8.0rem;
       height: 2.1rem;
     }
@@ -129,7 +129,7 @@
   <!-- tool-bottom -->
   <div id="tool">
     <p class="getlocal"><img src="../img/map_left.png"/></p>
-    <div id="scanQRCode1"><img src="../img/map_near.png"/></div>
+    <div id="nearDevice"><img src="../img/map_near.png"/></div>
     <a class="refresh" id="sell_list"><img src="../img/map_refresh.png" alt=""/></a>
   </div>
 
@@ -167,25 +167,6 @@
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
-      // mock data
-      var res = {
-        code: 1, 
-        msg: "获取成功！",
-        data: [
-          {
-            address:"龙岗区坪地坪西东兴路二号", ads_id:"46", ctime:"1514022110", id:"43", is_binding:"1", lat:"22.7689", lng:"114.291057", machine_code:"9BH000001", machine_name:"九瓣花大健康深圳店20171223174147", set_id:"1", shop_id:"38", status:"2", status_ctime:"1520956800", user_distance:"2.82244530110211", user_id:"1", video_id:"30"
-          },
-          {
-            address:"深圳市龙华新区油松路中陆科技大厦二楼", ads_id:"55", ctime:"1516777408", id:"50", is_binding:"1", lat:"22.651911", lng:"114.052366", machine_code:"9BH000098", machine_name:"博时特20180124150238", set_id:"1", shop_id:"39", status:"2", status_ctime:"1520956800", user_distance:"2.82244530110211", user_id:"1", video_id:"30"
-          },
-          {
-            address:"南联地铁站", ads_id:"51", ctime:"1517384917", id:"51", is_binding:"2", lat:"22.727604", lng:"114.272131", machine_code:"9BH000011", machine_name:"博时特20180131154745", set_id:"1", shop_id:"40", status:"2", status_ctime:"1520956800", user_distance:"2.82244530110211", user_id:"1", video_id:"30"
-          },
-          {
-            address:"龙岗区佳业广场", ads_id:"52", ctime:"1521716546", id:"167", is_binding:"1", lat:"22.721006", lng:"114.274775", machine_code:"9BH000024", machine_name:"佳业广场002420180322190104", set_id:"1", shop_id:"41", status:"2", status_ctime:"1520956800", user_distance:"2.82244530110211", user_id:"1", video_id:"30"
-          }
-        ]
-      }
 
       var geolocation = new qq.maps.Geolocation("N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ", "myapp");
       var myGlobal = {} //局部全局对象，存储map地图对象
@@ -193,90 +174,116 @@
       var positionNum = 0;
 
       function showPosition(position) {
-            positionNum++;
-            var lat = position.lat;
-            var lng = position.lng;
-            var center = new qq.maps.LatLng(lat,lng);
-            console.log('具体地址：' + position.addr + '经度：' + lng + '纬度'+ lat);
+        positionNum++;
+        var lat = position.lat;
+        var lng = position.lng;
+        var center = new qq.maps.LatLng(lat,lng);
+        console.log('具体地址：' + position.addr + '经度：' + lng + '纬度'+ lat);
 
-            var map = new qq.maps.Map(document.getElementById('container'),{
-                center: new qq.maps.LatLng(lat,lng),
-                zoom: 13,
+        var map = new qq.maps.Map(document.getElementById('container'),{
+          center: new qq.maps.LatLng(lat,lng),
+          zoom: 13,
                 draggable: true,//手势控制, 用来设置地图是否能够鼠标拖拽，默认值为“可以”；
                 scrollwheel: true,//用来配置地图是否能够通过鼠标滚轮操作进行放大，默认值为“可以”；
                 disableDoubleClickZoom: false, // 用来配置地图是否可以通过鼠标双击进行放大，默认值为“可以”。
                 disableDefaultUI: true
-            });
+              });
 
-            myGlobal.map = map;
-            
-            //创建marker
-            var marker = new qq.maps.Marker({
-                position: center,
-                map: map
-            });
-            
-            //自定义标注图标
-            var anchor = new qq.maps.Point(12, 24),
-                  size = new qq.maps.Size(24, 24),
-                  origin = new qq.maps.Point(0, 0),
-                  markerIcon = new qq.maps.MarkerImage(
-                  "../img/map-current.png",
-                  size,
-                  origin,
-                  anchor
-                );
-             marker.setIcon(markerIcon);
+        myGlobal.map = map;
 
-             (function (res) {
-                    // console.log(res)
-                    for(var i in res.data){
-                        var logo1 = new qq.maps.LatLng(res.data[i].lat,res.data[i].lng);
+        //创建marker
+        var marker = new qq.maps.Marker({
+          position: center,
+          map: map
+        });
+            
+        //自定义标注图标
+        var anchor = new qq.maps.Point(12, 24),
+        size = new qq.maps.Size(24, 24),
+        origin = new qq.maps.Point(0, 0),
+        markerIcon = new qq.maps.MarkerImage(
+          "../img/map-current.png",
+          size,
+          origin,
+          anchor
+          );
+        marker.setIcon(markerIcon);
+
+        $.ajax({
+          type:"post",
+          url: location.origin + "/freeBalance/mock/getMachineList.json",
+          dataType:'json',
+          data:{
+            api_name:'getMachineList',
+            lat:lat,
+            lng:lng,
+            openid:localStorage.getItem('wx_openid')
+          },
+          success:function(data){
+            var res = data.data;
+            console.log(res);
+            for(var i in res){
+              var logo1 = new qq.maps.LatLng(res[i].lat,res[i].lng);
                         //创建marker
                         var logo = new qq.maps.Marker({
-                            position: logo1,
-                            map: map
+                          position: logo1,
+                          map: map
                         });
                         //自定义标注图标 46, 52
                         var anchor = new qq.maps.Point(23, 52),
-                            size = new qq.maps.Size(46, 52),
-                            scaleSize = new qq.maps.Size(46, 52),
-                            origin = new qq.maps.Point(0, 0),
-                            markerIcon = new qq.maps.MarkerImage(
-                              "../img/map-on.png",
-                              size, 
-                              origin,
-                              anchor,
-                              scaleSize
-                            );
-                         logo.setIcon(markerIcon);
-                         
+                        size = new qq.maps.Size(46, 52),
+                        scaleSize = new qq.maps.Size(46, 52),
+                        origin = new qq.maps.Point(0, 0),
+                        markerIcon = new qq.maps.MarkerImage(
+                          "../img/map-on.png",
+                          size, 
+                          origin,
+                          anchor,
+                          scaleSize
+                        );
+                        logo.setIcon(markerIcon);
+
                          //设置属性
-                         logo.name=res.data[i].machine_name;  
-                         logo.address= res.data[i].address;
-                         logo.id= res.data[i].shop_id;
-                         logo.lat=res.data[i].lat;
-                         logo.lng=res.data[i].lng;
+                         logo.name=res[i].machine_name;  
+                         logo.address= res[i].address;
+                         logo.id= res[i].shop_id;
+                         logo.lat=res[i].lat;
+                         logo.lng=res[i].lng;
                          //console.log(logo.name)
                          
                         //点击地图上的店铺图标后，顶部显示信息框（店铺地址名称）
                         qq.maps.event.addListener(logo, 'click', function(e) {
+                          var result = '';
                           $('#topStore').show();
                           // 点击图标高亮，原来的恢复初始图标
                           if (myGlobal.LastTarget) {
                             $(myGlobal.LastTarget).attr('src', '../img/map-on.png');
                           }
-                          $(e.event.target).attr('src', '../img/map-on-active.png')
-                          $('#topStore').html('<div class="bus-info" data-lat="' + this.lat + '"data-lng="' + this.lng + '" data-address="' + this.address + '" data-name="' + this.name +'" data-id="' + this.id + '"><h3 class="bus-head">'+this.name+'</h3> <p class="bus-addr"><img src="../img/history01.png"><span>'+this.address+'</span> </p></div>')
+                          $(e.event.target).attr('src', '../img/map-on-active.png');
+                          result += '<div class="bus-info" data-lat="' + this.lat;
+                          result += '"data-lng="' + this.lng;
+                          result += '" data-address="' + this.address;
+                          result += '" data-name="' + this.name;
+                          result += '" data-id="' + this.id;
+                          result += '"><h3 class="bus-head">'+this.name;
+                          result += '</h3> <p class="bus-addr"><img src="../img/history01.png"><span>';
+                          result += this.address+'</span> </p></div>';
+                          $('#topStore').html(result);
+                          // 存储上一个选中的图标
                           myGlobal.LastTarget = e.event.target;
                         });
+                      }
                     }
-                  })(res);
-          }
+        });
+              //附近设备
+              $('#nearDevice').click(function(){
+                window.location.href='nearDevice.html?lng='+lng+'&lat='+lat;
+              });
+      }
           function showErr() {
             positionNum++;
             console.log('定位失败！' + positionNum);
-          };
+          }
           geolocation.getLocation(showPosition, showErr, options);
 
           // 重新定位
@@ -285,21 +292,23 @@
               myGlobal.map.panTo(new qq.maps.LatLng(position.lat, position.lng));
             }
             geolocation.getLocation(gotoLocal, showErr, options);
-          })
+          });
           // 刷新地图
           $('.refresh').click(function () {
             location.href='map.html';
-          })
+          });
+
+
           // 传导航所需数据
           $('#topStore').on('click','div.bus-info', function() {
               var strHref = '';
-              strHref += 'shopDetails.html?'
-              strHref += 'id='+$(this).attr('data-id')
-              strHref += '&eword='+$(this).data('name')
-              strHref += '&epointx='+$(this).data('lng')
-              strHref += '&epointy='+$(this).data('lat')
+              strHref += 'shopDetails.html?';
+              strHref += 'id='+$(this).attr('data-id');
+              strHref += '&eword='+$(this).data('name');
+              strHref += '&epointx='+$(this).data('lng');
+              strHref += '&epointy='+$(this).data('lat');
               location.href = strHref;
-          })
+          });
 
           // 底部tabbar导航事件
           $('#myTabbar a').eq(0).click(function(){

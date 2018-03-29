@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="../css/base.css">
   <link rel="stylesheet" type="text/css" href="../css/weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/dropload.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
   <title>PK</title>
   <style type="text/css">
@@ -41,6 +42,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
       padding-bottom: 0.5rem;
       background: #fff;
     }
@@ -87,6 +89,7 @@
     .rank-list .userPhoto {
       width: 1.6rem;
       height: 1.6rem;
+      border-radius: 50%;
     }
     .rank-list li {
       height: 3.1rem;
@@ -128,10 +131,16 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    .weui-loadmore {
+      min-width: 100px;
+    }
 
     @media only screen and (max-width: 360px) {
       .rank-container .weui-flex {
         width: 15.6rem;
+      }
+      .my-header .weui-flex {
+        /*max-width: 15.6rem;*/
       }
     }
   </style>
@@ -140,21 +149,21 @@
   <!-- header -->
   <header class="my-header">
     <div class="profile">
-      <img src="../img/analyse_03.jpg" class="head-photo">
+      <img src="../img/no-data.png" class="head-photo">
     </div>
-    <p class="userName">简笔画</p>
+    <p class="userName">--</p>
     <div class="weui-flex text-center">
       <div class="weui-flex__item">
         <p>得分</p>
-        <p>88.1</p>
+        <p id="score">--</p>
       </div>
       <div class="weui-flex__item">
         <p>打败人数</p>
-        <p>15245</p>
+        <p id="defeats">--</p>
       </div>
       <div class="weui-flex__item">
         <p>总人数</p>
-        <p>212311</p>
+        <p id="total">--</p>
       </div>
     </div>
   </header>
@@ -165,48 +174,18 @@
       <div class="score-head weui-flex__item">得分</div>
       <div class="rank-head weui-flex__item">排名</div>
     </div>
-    <ul class="rank-list">
-      <li class="weui-flex text-center">
-        <div class="nicknameAndImg weui-flex__item">
-          <img src="../img/2.jpg" class="userPhoto">
-          <span class="nickname">...king</span>
-        </div>
-        <div class="userScore weui-flex__item">88.1</div>
-        <div class="userRank weui-flex__item">3</div>
-      </li>
-      <li class="weui-flex text-center">
-        <div class="nicknameAndImg weui-flex__item">
-          <img src="../img/3.jpg" class="userPhoto">
-          <span class="nickname">空间的发挥</span>
-        </div>
-        <div class="userScore weui-flex__item">99.1</div>
-        <div class="userRank weui-flex__item">1</div>
-      </li>
-      <li class="weui-flex text-center">
-        <div class="nicknameAndImg weui-flex__item">
-          <img src="../img/4.jpg" class="userPhoto">
-          <span class="nickname">空间</span>
-        </div>
-        <div class="userScore weui-flex__item">98.1</div>
-        <div class="userRank weui-flex__item">2</div>
-      </li>
-      <li class="weui-flex text-center">
-        <div class="nicknameAndImg weui-flex__item">
-          <img src="../img/5.jpg" class="userPhoto">
-          <span class="nickname">空间的发挥</span>
-        </div>
-        <div class="userScore weui-flex__item">97.1</div>
-        <div class="userRank weui-flex__item">3</div>
-      </li>
-      <li class="weui-flex text-center">
-        <div class="nicknameAndImg weui-flex__item">
-          <img src="../img/6.jpg" class="userPhoto">
-          <span class="nickname">空间的发挥</span>
-        </div>
-        <div class="userScore weui-flex__item">96.1</div>
-        <div class="userRank weui-flex__item">4</div>
-      </li>
-    </ul>
+    <div class="rank-list-container">
+      <ul class="rank-list">
+        <!-- <li class="weui-flex text-center">
+          <div class="nicknameAndImg weui-flex__item">
+            <img src="../img/2.jpg" class="userPhoto">
+            <span class="nickname">...king</span>
+          </div>
+          <div class="userScore weui-flex__item">88.1</div>
+          <div class="userRank weui-flex__item">3</div>
+        </li> -->
+      </ul>
+    </div>
   </section>
   
   
@@ -239,6 +218,8 @@
   <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
   <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/dropload.min.js"></script>
+  <script type="text/javascript" src="../js/dlc.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(function () {
@@ -258,6 +239,94 @@
       $('#myTabbar a').eq(3).click(function(){
         location.href='person.html?status=1';
       });
+
+      // 页数
+       var page = 0;
+      // 每页展示10个
+      var size = 10;
+
+      $.ajax({
+        type:"post",
+        data:{
+          api_name:'getPkList',
+          openid: localStorage.getItem('wx_openid'),
+          id: getUrlParam('id'),
+        },
+        url: location.origin + "/freeBalance/mock/getPkList.json",
+        dataType:'json',
+        success:function(data){
+          var res = data.data;
+          console.log(data);
+          if(data.code === 1){
+            $('.head-photo').attr('src', res.pkList[0].headimg);
+            $('.userName').text(res.nickName);
+            $('#score').text(res.score);
+            $('#defeats').text(res.defeats);
+            $('#total').text(res.total);
+          }
+        }
+      });
+      // dropload
+      $('.rank-list-container').dropload({
+          scrollArea : window,
+          domDown : {
+              domClass   : 'dropload-down',
+              domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+              domLoad    : '<div class="dropload-load"><span class="loadings"></span>加载中...</div>',
+              domNoData  : '<div class="dropload-noData">人家也是有底线的</div>'
+          },
+          loadDownFn : function(me){
+              page++;
+              // 拼接HTML
+              var result = '';
+              $.ajax({
+                  type: 'POST',
+                  data:{
+                  api_name:'getPkList',
+                  openid: localStorage.getItem('wx_openid'),
+                  id: getUrlParam('id'),
+                  page: page,
+                  size: size
+                },
+              url: location.origin + "/freeBalance/mock/getPkList.json",
+              dataType: 'json',
+              success: function(data){
+                 var res = data.data;
+                 console.log(res);
+                 console.log(page);
+                 var arrLen = res.pkList.length;
+                 if(arrLen > 0 && data.code === 1) {
+                   for(var i=0; i<arrLen; i++){
+                      result += '<li class="weui-flex text-center">';
+                      result += '<div class="nicknameAndImg weui-flex__item">';
+                      result += '<img src="'+ res.pkList[i].headimg +'" class="userPhoto">';
+                      result += '<span class="nickname">'+ res.pkList[i].nickName +'</span>';
+                      result += '</div>';
+                      result += '<div class="userScore weui-flex__item">'+ res.pkList[i].score +'</div>';
+                      result += '<div class="userRank weui-flex__item">'+ res.pkList[i].ranks +'</div></li>';
+                   }
+                 } else {
+                     // 锁定
+                     me.lock();
+                     // 无数据
+                     me.noData();
+                 }
+                 // 插入数据到页面，放到最后面
+                 $('.rank-list').append(result);
+                 // 每次数据插入，必须重置
+                 me.resetload();
+                 // 为了测试，延迟1秒加载
+                 // setTimeout(function(){
+                 // }, 1000);
+               },
+               error: function (xhr) {
+                 console.log(xhr.status);
+               }
+             });
+          },
+          threshold : 50
+      });
+
     });
   </script>
 </body>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../css/base.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" href="../css/dropload.css" />
+  <title>附近的设备</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .more-row {
+      position: absolute;
+      height: 4.0625rem;
+      right: 0;
+      left: 0;
+      background: rgba(255,255,255,0);
+    }
+    .more-row span {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 1.53125rem;
+      right: 6%;
+      background: url('../img/more-row.png') no-repeat;
+      background-size: cover;
+    }
+    li.shop-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: 4.0625rem;
+      border-bottom: 1px solid #e5e5e5;
+      overflow: hidden;
+    }
+    .shop-item {
+      font-size: 0.875rem;
+      background: #fff;
+    }
+    .shop-info {
+      display: flex;
+      align-items: center;
+    }
+    .shop-info img {
+      width: 2.1875rem;
+      height: 2.1875rem;
+      border-radius: 50%;
+      margin: 0 0.9375rem;
+    }
+    .shop-head h3 {
+      color: #444;
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+    .shop-head p {
+      background: url(../img/history01.png) 2% no-repeat;
+      background-size: 0.875rem;
+      padding-left: 1.15rem;
+      margin-top: 0.25rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- use my-rem 16px = 1rem -->
+  <!-- container -->
+  <section class="container">
+    <ul class="device-list">
+      <!-- <li class="shop-item">
+        <div class="shop-info">
+          <img src="../img/shopDetail03.jpg" alt="">
+          <div class="shop-head">
+            <h3>摩尔城</h3>
+            <p class="jbh-ellipsis">南联地铁站</p>
+          </div>
+        </div>
+        <a href="javascript:;" class="more-row">
+          <span></span>
+        </a>
+      </li> -->
+    </ul>
+  </section>
+
+  <!-- script -->
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/dropload.min.js"></script>
+  <script type="text/javascript" src="../js/dlc.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      // 页数
+      var page = 0;
+      // 每页展示10个
+      var size = 10;
+
+       // dropload
+       $('.container').dropload({
+         scrollArea : window,
+         domUp : {
+           domClass   : 'dropload-up',
+           domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+           domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+           domLoad    : '<div class="dropload-load"><span class="loadings"></span>加载中...</div>'
+         },
+         domDown : {
+           domClass   : 'dropload-down',
+           domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+           domLoad    : '<div class="dropload-load"><span class="loadings"></span>加载中...</div>',
+           domNoData  : '<div class="dropload-noData">人家也是有底线的...</div>'
+         },
+         loadUpFn : function(me){
+          $.ajax({
+              type: 'POST',
+              data:{
+                api_name:'getShopList',
+                openid:localStorage.getItem('wx_openid'),
+                page:1,
+                pagesize:size,
+                lat:getUrlParam('lat'),
+                lng:getUrlParam('lng')
+              },
+              url: location.origin + "/freeBalance/mock/getShopList.json",
+              dataType:'json',
+              success: function(data){
+                console.log(data);
+                var res = data.data; //res is array
+                var result = '';
+                for(var i = 0; i < res.length; i++){
+                  result += '<li class="shop-item" data-shop_id="'+ res[i].id +'"><div class="shop-info">';
+                  result += '<img src="../img/shopDetail03.jpg" alt="">';
+                  result += '<div class="shop-head">';
+                  result += '<h3>'+ res[i].name +'</h3>';
+                  result += '<p class="jbh-ellipsis">'+ res[i].address +'</p></div>';
+                  result += '</div>';
+                  result += '<a href="javascript:;" class="more-row">';
+                  result += '<span></span></a></li>';
+                }
+                // 为了测试，延迟1秒加载
+                setTimeout(function(){
+                  $('.device-list').html(result);
+                    // 每次数据加载完，必须重置
+                    me.resetload();
+                    // 重置页数，重新获取loadDownFn的数据
+                    page = 1;
+                    // 解锁loadDownFn里锁定的情况
+                    me.unlock();
+                    me.noData(false);
+                },1000);
+              },
+              error: function(xhr) {
+                console.log(xhr.status);
+              }
+           });
+         },
+         loadDownFn : function(me){
+              page++;
+               // 拼接HTML
+               var result = '';
+               $.ajax({
+                 type: 'POST',
+                 data:{
+                  api_name:'getShopList',
+                  openid:localStorage.getItem('wx_openid'),
+                  page:page,
+                  pagesize:size,
+                  lat:getUrlParam('lat'),
+                  lng:getUrlParam('lng')
+                },
+                url: location.origin + "/freeBalance/mock/getShopList.json",
+                dataType:'json',
+                success: function(data){
+                  var res = data.data;
+                  var arrLen = data.data.length;
+                  console.log(res);
+                  console.log(page);
+                  if(arrLen > 0){
+                    for(var i=0; i<arrLen; i++){
+                      result += '<li class="shop-item" data-shop_id="'+ res[i].id +'"><div class="shop-info">';
+                      result += '<img src="../img/shopDetail03.jpg" alt="">';
+                      result += '<div class="shop-head">';
+                      result += '<h3>'+ res[i].name +'</h3>';
+                      result += '<p class="jbh-ellipsis">'+ res[i].address +'</p></div>';
+                      result += '</div>';
+                      result += '<a href="javascript:;" class="more-row">';
+                      result += '<span></span></a></li>';
+                    }
+                  } else{// 如果没有数据  
+                      // 锁定
+                      me.lock();
+                      // 无数据
+                      me.noData();
+                    }
+                       // 为了测试，延迟1秒加载
+                       setTimeout(function(){
+                           // 插入数据到页面，放到最后面
+                           $('.device-list').append(result);
+                           // 每次数据插入，必须重置
+                           me.resetload();
+                       }, 1000);
+                   },
+                 });
+              },
+             threshold : 50
+           });
+
+        $('.device-list').on('click','li',function(){
+          location.href='shopDetails.html?id='+$(this).data('shop_id');
+        });
+    });
+  </script>
+</body>
+</html>

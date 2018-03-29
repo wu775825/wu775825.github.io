@@ -1,0 +1,95 @@
+{
+  "code": 1, 
+  "msg": "获取成功！", 
+  "data": [
+    {
+      "address": "南联地铁站", 
+      "id": "39", 
+      "name": "九瓣花大健康深圳店", 
+      "phone": "0755-36873698", 
+      "shop_id": "39", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    },
+    {
+      "id": "57", 
+      "shop_id": "57", 
+      "name": "佳业广场0024", 
+      "address": "龙岗区佳业广场", 
+      "phone": "",
+      "shop_id": "51", 
+      "user_distance": "2.82244530110211"
+    }
+  ]
+}

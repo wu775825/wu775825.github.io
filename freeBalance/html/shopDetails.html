@@ -11,7 +11,7 @@
   <!-- <link rel="stylesheet" type="text/css" href="../css/weui.min.css"> -->
   <!-- <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css"> -->
   <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <title>附近的秤</title>
+  <title></title>
   <style type="text/css">
     .bigImg {
       height: 9.375rem;
@@ -45,11 +45,11 @@
       margin-bottom: 0.625rem;
     }
     .detailsBox .gotoImg {
-      width: 45px;
-      height: 45px;
+      width: 3.75rem;
+      height: 3.75rem;
       position: absolute;
       right: 1.8rem;
-      top: -1.15rem;
+      top: -1.825rem;
     }
     /*hot-recommend*/
     .hot-recommend {
@@ -93,54 +93,31 @@
   </style>
 </head>
 <body>
+  <!-- use my-rem 16px 1rem -->
   <!-- container -->
   <section>
-    <div class="bigImg"><img src="../img/shopDetail03.jpg"/></div>
+    <div class="bigImg"><img src="../img/no-data.png"/></div>
     <div class="detailsBox">
       <img  class="gotoImg" src="../img/shopDetail01.png">
-      <p id="name" class="color-333">摩尔城</p>
+      <p id="name" class="color-333">--</p>
       <div>
         <img src="../img/shopDetail-phone.png"/>
-        <a href="tel:020-32658745" class="color-666 font-15" id="tel">0788-5852455</a>
+        <a href="javascript:;" class="color-666 font-15" id="tel">--</a>
       </div>
       <div class="color-666">
-        <img src="../img/history01.png"/><span id="address">南联地铁站斜对面</span>
+        <img src="../img/history01.png"/><span id="address">--</span>
       </div>
     </div>
-    <!--<div class="LR-block paddingTB-4 paddingLR-24 marginTop-20" id="comment">
-      <span class="color-333 font-15" id="comment_num"></span>
-      <em class="flex-center">
-        <div class="commentsImg">
-          <img src="../img/star.png"/>
-          <img src="../img/star.png"/>
-          <img src="../img/star.png"/>
-          <img src="../img/star.png"/>
-          <img src="../img/star_hui.png"/>
-        </div>
-        <div><img src="../img/arrow_right.png" class="arrow_right"/></div>
-      </em>
-    </div>-->
-    
-    <div class="hot-recommend background-fff text-center marginTop-20 font-15 color-333">
+    <div class="hot-recommend text-center color-333">
       <span>热门推荐</span>
       <img src="../img/shopDetail-hot.png"/>
     </div>
     <div class="recommendBox">
       <ul class="clearfix color-333">
-        <li>
+        <!-- <li>
           <img src="../img/shopDetail02.jpg"/>
           <p>儿童健康成长体验</p>
-        </li>
-        <li>
-          <img src="../img/shopDetail02.jpg"/>
-          <p>儿童健康成长体验</p>
-        </li><li>
-          <img src="../img/shopDetail02.jpg"/>
-          <p>儿童健康成长体验</p>
-        </li><li>
-          <img src="../img/shopDetail02.jpg"/>
-          <p>儿童健康成长体验</p>
-        </li>
+        </li> -->
       </ul>
     </div>
   </section>
@@ -158,12 +135,43 @@
     $(function () {
       //去到这导航
       $('.gotoImg').on('click', function() {
-          var strHref = 'http://apis.map.qq.com/tools/routeplan/eword='+getUrlParam('eword')+'&epointx='+getUrlParam('epointx')+'&epointy='+getUrlParam('epointy')+'?referer=myapp&key=N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ'
+          var strHref = 'http://apis.map.qq.com/tools/routeplan/eword='+getUrlParam('eword')+'&epointx='+getUrlParam('epointx')+'&epointy='+getUrlParam('epointy')+'?referer=myapp&key=N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ';
           console.log(strHref);
-          location.href = strHref
-      })
-      console.log(location);
-    })
+          location.href = strHref;
+      });
+      //请求商家详情信息
+      $.ajax({
+        type:"post",
+        data:{
+          api_name:'getShopDetails',
+          openid:localStorage.getItem('wx_openid'),
+          id: getUrlParam('id')
+        },
+        url: location.origin + "/freeBalance/mock/getShopDetails.json",
+        dataType:'json',
+        success:function(data){
+          console.log(data);
+          var res = data.data;
+          var result='';
+          if(data.code === 1){
+            $('.bigImg img').attr('src',res.pic);
+            $('#name').text(res.name);
+            $('title').text(res.name);
+            $('#tel').attr('href','tel:'+res.phone).text(res.phone);
+            $('#address').text(res.address);
+
+            for(var k in res.pic_arr){
+              result+=  '<li>'+
+                        '<img src="'+res.pic_arr[k].pic+'" alt="" />'+
+                        '<p>'+res.pic_arr[k].title+'</p>'+
+                        '</li>';
+            }
+            $('.recommendBox ul').html(result); 
+          }
+        }
+      });
+
+    });
   </script>
 </body>
 </html>

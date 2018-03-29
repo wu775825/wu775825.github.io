@@ -111,7 +111,7 @@
   <!-- header -->
   <header class="my-header">
     <div class="profile">
-      <img src="../img/person.png" class="head-photo">
+      <img src="../img/no-data.png" class="head-photo">
     </div>
     <p class="userName">--</p>
   </header>
@@ -191,7 +191,7 @@
           if(data.code === 1){
             $('.head-photo').attr('src',data.data.headimg);
             $('.userName').text(data.data.nickname);
-            $('#sex').text(data.data.sex=='1'?'男':'女');
+            $('#sex').text(data.data.sex == '1' ? '男':'女');
             $('#age').text(data.data.birthday);
             $('#height').text(data.data.tall);
           } else {

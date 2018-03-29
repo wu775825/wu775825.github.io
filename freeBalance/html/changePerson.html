@@ -74,7 +74,7 @@
   <!-- header -->
   <header class="my-header">
     <div class="profile">
-      <img src="../img/person.png" class="head-photo">
+      <img src="../img/no-data.png" class="head-photo">
     </div>
     <p class="userName">--</p>
   </header>
@@ -192,7 +192,9 @@
         $('#confirm').click(function(){
           var times = $('#age').val();
           var height = $('#height').val();
-
+          // 去除height小数
+          height = Math.floor(height);
+          
           console.log(times);
           console.log(sex);
           console.log(height);
@@ -228,6 +230,7 @@
                 error: function () {
                   $.hideLoading();
                   $.toptip('修改失败', 'error');
+                  off = 0; //请求失败时重置off
                 }
               });
           }

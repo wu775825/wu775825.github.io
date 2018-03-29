@@ -210,8 +210,7 @@
       background-size: cover;
     }
     footer {
-      height: 70px;
-      margin-top: 16px;
+      padding: 0.6rem 0;
       color: #a1a1a1;
       font-size: 0.6rem;
       text-align: center;
@@ -318,7 +317,8 @@
   <footer>
     <p>本产品分析结果仅供参考，不应成为诊断或治疗疾病的最终依据。</p>
     <div class="weui-footer">
-      <p class="weui-footer__text">Copyright © 10wfans.com </p>
+      <p>合作热线：<a href="tel:400-867-3611">400-867-3611</a></p>
+      <p class="weui-footer__text">CopyRight © www.10wanfen.com All Rights Reserved</p>
     </div>
   </footer>
 
@@ -362,9 +362,6 @@
           pagination: '.pagination'
       });
 
-      //row动画
-      $('#row').addClass('rote90');
-
       // special-column click
       $('.special-sports').click(function () {
         location.href = 'specialColumnS.html';
@@ -396,18 +393,25 @@
         url: location.origin+'/freeBalance/mock/getHealth.json',
         dataType:'json',
         success: function (data) {
-          // console.log(data);
+          console.log(data);
           var res = data.data;
-          if(data.code=='1'){ 
-            // $('#sex').text(res.sex);
-            // $('#age').text(res.age+'岁');
+          if(data.code === 1){
             $('#height').text(res.height);
             $('#weight').text(res.weight * 2);
             $('#bmi').text((res.fat === null ? '--':res.fat)); // fat就是BMI字段
-            $('#weightType').text(res.hname === null ? '--': res.hname);  
-            $('#standardWeight').text(res.standard_weight === null ? '--':res.standard_weight*2+'斤');
-            $('#perfectWeight').text(res.standard_weight === null ? '--':res.standard_weight*2+5+'斤');
+            $('#weightType').text(res.hname === null ? '--': res.hname);
+            // 标准体重=(身高cm-100)x0.9(kg)  标准体重(女)=(身高cm-100)x0.9(kg)-2.5(kg)
+            var calc = Math.floor((res.height - 100) * 1.8);
+            if (res.sex === '男') {
+              $('#standardWeight').text(calc);
+              $('#perfectWeight').text(calc - 4);
+            } else {
+              $('#standardWeight').text(calc - 4);
+              $('#perfectWeight').text(calc - 8);
+            }
             $('#standarBmi').text(res.standard_fat === null?'--':res.standard_fat);// 正常BMI范围
+            //row动画
+            $('#row').addClass('rote90');
           }
         }
       });

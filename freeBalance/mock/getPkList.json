@@ -1,0 +1,58 @@
+{
+    "code": 1, 
+    "msg": "获取成功", 
+    "data": {
+        "nickName": "缺牙", 
+        "score": 88.1, 
+        "defeats": 15245, 
+        "total": 212311, 
+        "pkList": [
+            {
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙", 
+                "score": 98, 
+                "ranks": 1
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙缺牙", 
+                "score": 98, 
+                "ranks": 12
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙缺", 
+                "score": 98, 
+                "ranks": 13
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙缺牙", 
+                "score": 98, 
+                "ranks": 14
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙缺牙缺牙", 
+                "score": 98, 
+                "ranks": 15
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙缺牙", 
+                "score": 98, 
+                "ranks": 16
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙", 
+                "score": 98, 
+                "ranks": 17
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙", 
+                "score": 98, 
+                "ranks": 18
+            },{
+                "headimg": "http://thirdwx.qlogo.cn/mmopen/zRAuZnMY1vHaRFl1NHDlYibG1JNXFfXeD85jgTeAaCctdmUlbxIP5Bc011Phia9lTMwBCKFtkkowotD0cU6pvKiakvRbVicewSau/132", 
+                "nickName": "缺牙", 
+                "score": 98, 
+                "ranks": 19
+            }
+        ]
+    }
+}
