@@ -58,7 +58,7 @@
       color: #fff;
     }
     #confirm {
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       width: 95%;
       background: #28b3ea;
     }
@@ -66,6 +66,10 @@
     .datetime-picker .picker-items>div:nth-child(2),
     .datetime-picker .picker-items>div:nth-child(4) {
       margin: 0 0.75rem;
+    }
+    /*Picker style*/
+    .weui-picker-modal {
+      height: 14rem;
     }
 
   </style>
@@ -90,7 +94,7 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">年龄</div>
       <div class="weui-cell__ft">
-        <input id="age" class="weui-input" type="text" value="1995-01-01 ">
+        <input id="age" class="weui-input" type="text" value="1995-06-11 ">
       </div>
     </div>
     <div class="weui-cell">
@@ -188,8 +192,6 @@
         $('#confirm').click(function(){
           var times = $('#age').val();
           var height = $('#height').val();
-          // 去除height小数
-          height = Math.floor(height);
 
           console.log(times);
           console.log(sex);
@@ -204,6 +206,8 @@
                 return false;
               }
               off = 1;
+              // 去除height小数
+              height = Math.floor(height);
               $.showLoading('正在保存数据');
               $.ajax({
                 type: "POST",
@@ -228,10 +232,12 @@
                     },1500);
                   } else {
                     off = 0;
-                    $.toast(res.msg);
+                    $.hideLoading();
+                    $.toast('注册失败', 'cancel');
                   }
                 },
                 error: function () {
+                  off = 0; //请求失败时重置off
                   $.hideLoading();
                   $.toptip('注册失败', 'error');
                 }

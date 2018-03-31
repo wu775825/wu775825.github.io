@@ -79,7 +79,7 @@
       font-size: 0.72rem;
       font-weight: 200;
     }
-    #height, #bmi, .oldWeight, #score {
+    .height, .bmi, .oldWeight, .score {
       font-size: 1.1rem;
     }
     .person-height, .person-bmi, 
@@ -235,21 +235,21 @@
             <div class="weui-flex swiper-slide">
               <div class="weui-flex__item person-height color-fff  text-center">
                 <p>身高(cm)</p>
-                <p id="height">--</p>
+                <p class="height">--</p>
               </div>
               <div class="weui-flex__item person-bmi color-fff text-center">
                 <p>BMI<img src="../img/help.png"></p>
-                <p id="bmi">--</p>
+                <p class="bmi">--</p>
               </div>
             </div>
             <div class="weui-flex swiper-slide">
               <div class="weui-flex__item person-oldWeight color-fff  text-center">
                 <p>上次体重</p>
-                <p class="oldWeight"><span id="lastWeight">--</span><span>斤</span></p>
+                <p class="oldWeight"><span class="lastWeight">--</span><span>斤</span></p>
               </div>
               <div class="weui-flex__item person-score color-fff text-center">
                 <p>得分</p>
-                <p id="score">--</p>
+                <p class="score">--</p>
               </div>
             </div>
         </div>
@@ -356,6 +356,22 @@
   <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
+      // 底部tabbar导航事件
+      $('#myTabbar a').eq(0).click(function(){
+        location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
+      });
+
+      $('#myTabbar a').eq(1).click(function(){
+        location.href='map.html';
+      });
+
+      $('#myTabbar a').eq(2).click(function(){
+        location.href='pk.html';
+      });
+
+      $('#myTabbar a').eq(3).click(function(){
+        location.href='person.html?status=1';
+      });
       // swiper轮播
       $('.swiper-container').swiper({
           loop: true,
@@ -396,9 +412,10 @@
           console.log(data);
           var res = data.data;
           if(data.code === 1){
-            $('#height').text(res.height);
+            $('.height').text(res.height === null ? '--':res.height);
             $('#weight').text(res.weight * 2);
-            $('#bmi').text((res.fat === null ? '--':res.fat)); // fat就是BMI字段
+            $('.bmi').text(res.fat === null ? '--':res.fat); // fat就是BMI字段
+            $('.score').text(res.score === null ? '--':res.score);
             $('#weightType').text(res.hname === null ? '--': res.hname);
             // 标准体重=(身高cm-100)x0.9(kg)  标准体重(女)=(身高cm-100)x0.9(kg)-2.5(kg)
             var calc = Math.floor((res.height - 100) * 1.8);
@@ -409,28 +426,11 @@
               $('#standardWeight').text(calc - 4);
               $('#perfectWeight').text(calc - 8);
             }
-            $('#standarBmi').text(res.standard_fat === null?'--':res.standard_fat);// 正常BMI范围
+            $('#standarBmi').text(res.standard_fat === null ? '--':res.standard_fat);// 正常BMI范围
             //row动画
             $('#row').addClass('rote90');
           }
         }
-      });
-
-      // 底部tabbar导航事件
-      $('#myTabbar a').eq(0).click(function(){
-        location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
-      });
-
-      $('#myTabbar a').eq(1).click(function(){
-        location.href='map.html';
-      });
-
-      $('#myTabbar a').eq(2).click(function(){
-        location.href='pk.html';
-      });
-
-      $('#myTabbar a').eq(3).click(function(){
-        location.href='person.html?status=1';
       });
 
       // 历史体重
@@ -447,13 +447,8 @@
               top: 8,
               left: 8
           },
-          toolbox: {
-              feature: {
-                  saveAsImage: {}
-              }
-          },
           grid: {
-              left: '6%',
+              left: '-4%',
               right: '6%',
               top: '45',
               height: 130,
@@ -483,11 +478,12 @@
           },
           yAxis : {
               type: 'value',
+              silent: true,
               min: function(value) {
-                    return value.min - 30;
+                    return value.min - 8;
               },
               max: function(value) {
-                    return value.max + 30;
+                    return value.max + 8;
               },
               axisTick: {
                 show: false
@@ -511,6 +507,7 @@
               type:'line',
               smooth: true,
               symbol: 'circle',
+              showSymbol: true,
               symbolSize: 6,
               label: {
                 normal: {
@@ -518,6 +515,7 @@
                   color: '#00ac82'
                 }
               },
+
               areaStyle: {
                 normal: {
                   color: "#d4f7ed"
@@ -539,6 +537,7 @@
             {
               type: 'slider',
               show: true,
+              realtime: false,
               dataBackground: {
                 lineStyle: {
                   color: '#d4f7ed'
@@ -554,8 +553,8 @@
               },
               xAxisIndex: [0],
               bottom: 8,
-              start: 1, // 数据窗口范围的起始百分比
-              end: 80
+              start: 20, // 数据窗口范围的起始百分比
+              end: 100
             }
           ]
       };
@@ -566,24 +565,28 @@
         data:{
           api_name:'healthList',
           page: 1, // 页数
-          pagesize: 7, // 每页展示10个
+          pagesize: 7, // 每页展示7个
           openid:localStorage.getItem('wx_openid'),
         },
         url: "http://127.0.0.1/freeBalance/mock/healthList.json", 
         dataType: 'json',
         success: function(data){
           console.log(data);
-          var weight = [], ctime = [];
+          var weights = [], times = [];
           if (data.code === 1) {
-            for(var i in data.data.stat){
-              weight.push(data.data.stat[i].weight * 2);
-              ctime.push(data.data.stat[i].ctime.substr(5));
+            //将体重时间存入数组，绘制表格
+            for(var i in data.data.res){
+              weights.push(data.data.res[i].weight * 2);
+              times.push(data.data.res[i].ctime.substr(5));
             }
+
+            $('.lastWeight').text(weights[1]);
           } else {
             $.toast("纯文本", data.code);
           }
-          option.xAxis.data = ctime;
-          option.series.data = weight;
+          option.xAxis.data = times.reverse();
+          option.series.data = weights.reverse();
+
           myChart.setOption(option);
         },
         error: function () {
@@ -591,27 +594,6 @@
         }
       });
 
-      //判断健康状况
-      // function getTip(){
-      //   var Height=Number($('#Height').text())/100;
-      //   var weight=Number($('#weight').text());
-      //   var indicators=(weight/(Height*Height)).toFixed(2);
-      //   console.log(indicators)
-      //   var tipText='';
-      //   if(indicators<18.5){
-      //     tipText='偏瘦：下次多吃点再来吧！';
-      //   }else if(indicators>=18.5 && indicators<=23.9 ){
-      //     tipText='正常：很棒哦！快去告诉身边的朋友吧！';
-      //   }else if(indicators>=28 ){
-      //     tipText='肥胖：从现在开始减肥，相信自己会瘦下来！加油！';
-      //   }else if(indicators>24 && indicators <=27.9){
-      //     tipText='偏胖：少吃那么一丢丢你就是标准体重啦，加油吧！';
-      //   }else if(indicators>=24){
-      //     tipText='超重：少吃多运动很健康哦！';
-      //   }
-      //   $('#tipText').text(tipText);
-      //   return indicators;
-      // }
     });
   </script>
 </body>

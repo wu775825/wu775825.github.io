@@ -68,7 +68,7 @@
     }
     .user-info .weui-input {
       text-align: right;
-      color: #555;
+      color: #333!important;
     }
     .user-info span.weui-cell__ft {
       margin-left: 6px;
@@ -120,7 +120,7 @@
   <section class="user-info">
     <div class="weui-cell">
       <div class="weui-cell__bd">性别</div>
-      <div class="weui-cell__ft color-333">
+      <div class="weui-cell__ft">
         <input id="sex" class="weui-input" type="text" value="--" disabled="disabled" readonly="">
       </div>
       <a href="./changePerson.html" class="more-row">
@@ -184,16 +184,16 @@
       $.ajax({
         type:"POST",
         data:{api_name:'getNickImg',openid:localStorage.getItem('wx_openid')},
-        url: '',
+        url: location.origin+'/freeBalance/mock/getNickImg.json',
         dataType:"json",
         success:function(data){
-          console.log(data);  
+          console.log(data.data);
           if(data.code === 1){
             $('.head-photo').attr('src',data.data.headimg);
             $('.userName').text(data.data.nickname);
-            $('#sex').text(data.data.sex == '1' ? '男':'女');
-            $('#age').text(data.data.birthday);
-            $('#height').text(data.data.tall);
+            $('#sex').val(data.data.sex === '1' ? '男':'女');
+            $('#age').val(data.data.birthday);
+            $('#height').val(data.data.tall);
           } else {
             $.toast(data.msg, "cancel");
           }

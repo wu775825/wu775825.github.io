@@ -92,7 +92,12 @@ a {
   transform: rotate(94deg);
 }
 
-
+*{
+  /*避免点击a标签或者注册了click事件的元素时产生高亮*/
+  -webkit-tap-highlight-color:rgba(255,255,255,0);
+  阻止长按图片之后呼出菜单提示复制的行为
+  -webkit-touch-callout:none; 
+}
 
 
 

@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="../css/jquery-weui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
   <title>信息修改</title>
-  <style type="text/css">
+  <style type="text/css"> 
     /*header*/
     .my-header {
       height: 6.75rem;
@@ -58,16 +58,30 @@
       color: #fff;
     }
     #confirm {
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       width: 95%;
       background: #28b3ea;
     }
     /* timePicker style*/
     .datetime-picker .picker-items>div:nth-child(2),
     .datetime-picker .picker-items>div:nth-child(4) {
-      margin: 0 0.75rem;
+      margin: 0 0.95rem;
+      color: #28b3ea;
     }
-
+    .weui-picker-modal {
+      height: 14rem;
+    }
+    .weui-picker-modal .picker-item {
+      height: 48px;
+      line-height: 48px;
+    }
+    .weui-picker-modal .picker-center-highlight {
+      height: 48px;
+      margin-top: -24px;
+    }
+    .weui-picker-modal .picker-item.picker-selected {
+      color: #28b3ea;
+    }
   </style>
 </head>
 <body>
@@ -90,7 +104,7 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">年龄</div>
       <div class="weui-cell__ft">
-        <input id="age" class="weui-input" type="text" value="1995-01-01 ">
+        <input id="age" class="weui-input" type="text" value="1995-06-11 ">
       </div>
     </div>
     <div class="weui-cell">
@@ -137,7 +151,8 @@
           return [
             
           ];
-        }
+        },
+        max: '2018-12-31'
       });
       // 修改jquery-weui Toast 默认时间
       $.toast.prototype.defaults.duration = 1200;
@@ -170,19 +185,14 @@
           }
         }
       }); 
-        
-        // '1'男 '2'女
-        $('#sex').change(function(){
-          sex = $(this).val() === '男' ? '1' : '2';
-          console.log(sex);
-        });
+        console.log(sex);
         // height > 0
         $('#height').change(function () {
-          if ($('#height').val() < 0) {
+          if ($('#height').val() < 49) {
             $('#height').val('');
-            $.toast("身高不能为负数", "text");
+            $.toast("身高小于最小值", "text");
           }
-          if ($('#height').val() > 300) {
+          if ($('#height').val() > 250) {
             $('#height').val('');
             $.toast("身高超过最大值", "text");
           }
@@ -192,8 +202,11 @@
         $('#confirm').click(function(){
           var times = $('#age').val();
           var height = $('#height').val();
-          // 去除height小数
-          height = Math.floor(height);
+          sex = $('#sex').val();
+          // '1'男 '2'女
+          if (sex !== '') {
+            sex = $('#sex').val() === '男' ? '1' : '2';
+          }
           
           console.log(times);
           console.log(sex);
@@ -208,6 +221,8 @@
                 return false;
               }
               off = 1;
+              // 去除height小数
+              height = Math.floor(height);
               $.showLoading('正在保存数据');
               $.ajax({
                 type: "POST",
@@ -216,7 +231,7 @@
                 dataType: "json",
                 success: function(res){
                   console.log(res);
-                  if(res.code === 1){
+                  if(res.code === 0){
                     $.hideLoading();
                     $.toast('修改成功', 'success');
                     setTimeout(function(){
@@ -224,7 +239,8 @@
                     },2000);
                   } else {
                     off = 0;
-                    $.toast(res.msg);
+                    $.hideLoading();
+                    $.toast('保存失败', 'cancel');
                   }
                 },
                 error: function () {
