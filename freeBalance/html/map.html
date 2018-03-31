@@ -90,8 +90,8 @@
     }
 
     #tool .getlocal img, #tool .refresh img {
-      width: 2.0rem;
-      height: 2.0rem;
+      width: 2.3rem;
+      height: 2.3rem;
     }
 
     .getlocal {
@@ -260,11 +260,12 @@
                             $(myGlobal.LastTarget).attr('src', '../img/map-on.png');
                           }
                           $(e.event.target).attr('src', '../img/map-on-active.png');
+                          console.log(this)
                           result += '<div class="bus-info" data-lat="' + this.lat;
                           result += '"data-lng="' + this.lng;
                           result += '" data-address="' + this.address;
                           result += '" data-name="' + this.name;
-                          result += '" data-id="' + this.id;
+                          result += '" data-shop_id="' + this.id;
                           result += '"><h3 class="bus-head">'+this.name;
                           result += '</h3> <p class="bus-addr"><img src="../img/history01.png"><span>';
                           result += this.address+'</span> </p></div>';
@@ -303,7 +304,7 @@
           $('#topStore').on('click','div.bus-info', function() {
               var strHref = '';
               strHref += 'shopDetails.html?';
-              strHref += 'id='+$(this).attr('data-id');
+              strHref += 'id='+$(this).attr('data-shop_id');
               strHref += '&eword='+$(this).data('name');
               strHref += '&epointx='+$(this).data('lng');
               strHref += '&epointy='+$(this).data('lat');

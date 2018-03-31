@@ -185,7 +185,11 @@
                   console.log(page);
                   if(arrLen > 0){
                     for(var i=0; i<arrLen; i++){
-                      result += '<li class="shop-item" data-shop_id="'+ res[i].id +'"><div class="shop-info">';
+                      result += '<li class="shop-item" data-shop_id="'+ res[i].shop_id + '" ';
+                      result += 'data-name="' + res[i].name + '" ';
+                      result += 'data-lat="' + res[i].lat + '" ';
+                      result += 'data-lng="' + res[i].lng+ '" ';
+                      result += '"><div class="shop-info">';
                       result += '<img src="../img/shopDetail03.jpg" alt="">';
                       result += '<div class="shop-head">';
                       result += '<h3>'+ res[i].name +'</h3>';
@@ -213,8 +217,15 @@
              threshold : 50
            });
 
-        $('.device-list').on('click','li',function(){
-          location.href='shopDetails.html?id='+$(this).data('shop_id');
+        // 传导航所需数据
+        $('.device-list').on('click','li', function() {
+            var strHref = '';
+            strHref += 'shopDetails.html?';
+            strHref += 'id='+$(this).attr('data-shop_id');
+            strHref += '&eword='+$(this).data('name');
+            strHref += '&epointx='+$(this).data('lng');
+            strHref += '&epointy='+$(this).data('lat');
+            location.href = strHref;
         });
     });
   </script>
