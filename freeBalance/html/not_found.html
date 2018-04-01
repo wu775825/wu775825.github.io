@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../css/base.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <title>404</title>
+  <style type="text/css">
+    .not-contain {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10rem;
+    }
+    .not-found {
+      margin-bottom: 2rem;
+    }
+    .not-found img {
+      width: 16.75rem;
+      height: 9.0rem;
+    }
+    button {
+      width: 10.0rem;
+      height: 2.5rem;
+      color: #fff;
+      line-height: 2.5rem;
+      font-size: 1rem;
+      background: #3da2d5;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- use my-rem 16px 1rem -->
+  <!-- container -->
+  <section class="not-contain">
+    <div class="not-found"><img src="../img/404.jpg" alt=""></div>
+    <button>返回首页</button>
+  </section>
+
+  <!-- script -->
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/swiper.min.js"></script>
+  <script type="text/javascript" src="../js/dlc.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('.not-contain button').click(function () {
+        location.href='index.html?opendid='+localStorage.getItem('wx_openid')+'&hid='+localStorage.getItem('hid');
+      });
+    });
+  </script>
+</body>
+</html>

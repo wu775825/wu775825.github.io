@@ -428,8 +428,11 @@
             }
             $('#standarBmi').text(res.standard_fat === null ? '--':res.standard_fat);// 正常BMI范围
             //row动画
-            $('#row').addClass('rote90');
+            $('#row').addClass('rotate90');
           }
+        },
+        error: function (xhr) {
+          console.log(xhr.status + ' ' + xhr.statusText);
         }
       });
 
@@ -579,7 +582,6 @@
               weights.push(data.data.res[i].weight * 2);
               times.push(data.data.res[i].ctime.substr(5));
             }
-
             $('.lastWeight').text(weights[1]);
           } else {
             $.toast("纯文本", data.code);
@@ -589,7 +591,8 @@
 
           myChart.setOption(option);
         },
-        error: function () {
+        error: function (xhr) {
+          console.log(xhr.status + ' ' + xhr.statusText);
           myChart.setOption(option);
         }
       });

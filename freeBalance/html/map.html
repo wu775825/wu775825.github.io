@@ -169,7 +169,7 @@
     $(function () {
 
       var geolocation = new qq.maps.Geolocation("N6RBZ-AJN35-AACI2-Q2ICF-HYV6O-JRBBZ", "myapp");
-      var myGlobal = {} //局部全局对象，存储map地图对象
+      var myGlobal = {} ;//局部全局对象，存储map地图对象
       var options = {timeout: 8000};
       var positionNum = 0;
 
@@ -260,7 +260,6 @@
                             $(myGlobal.LastTarget).attr('src', '../img/map-on.png');
                           }
                           $(e.event.target).attr('src', '../img/map-on-active.png');
-                          console.log(this)
                           result += '<div class="bus-info" data-lat="' + this.lat;
                           result += '"data-lng="' + this.lng;
                           result += '" data-address="' + this.address;
@@ -274,6 +273,9 @@
                           myGlobal.LastTarget = e.event.target;
                         });
                       }
+                    },
+                    error: function (xhr) {
+                      console.log(xhr.status + ' ' + xhr.statusText);
                     }
         });
               //附近设备

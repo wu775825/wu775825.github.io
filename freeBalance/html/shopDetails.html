@@ -171,6 +171,9 @@
             }
             $('.recommendBox ul').html(result); 
           }
+        },
+        error: function (xhr) {
+          console.log(xhr.status + ' ' + xhr.statusText);
         }
       });
 

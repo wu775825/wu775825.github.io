@@ -98,7 +98,7 @@
     <div class="weui-cell">
       <div class="weui-cell__bd">性别</div>
       <div class="weui-cell__ft">
-        <input id="sex" class="weui-input" type="text" value="男">
+        <input id="sex" class="weui-input" type="text" value="">
       </div>
     </div>
     <div class="weui-cell">
@@ -185,8 +185,7 @@
           }
         }
       }); 
-        console.log(sex);
-        // height > 0
+        //  250 > height > 49
         $('#height').change(function () {
           if ($('#height').val() < 49) {
             $('#height').val('');
@@ -231,7 +230,7 @@
                 dataType: "json",
                 success: function(res){
                   console.log(res);
-                  if(res.code === 0){
+                  if(res.code === 1){
                     $.hideLoading();
                     $.toast('修改成功', 'success');
                     setTimeout(function(){
@@ -245,7 +244,7 @@
                 },
                 error: function () {
                   $.hideLoading();
-                  $.toptip('修改失败', 'error');
+                  $.toptip('保存失败', 'error');
                   off = 0; //请求失败时重置off
                 }
               });

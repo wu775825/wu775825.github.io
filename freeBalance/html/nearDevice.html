@@ -146,7 +146,7 @@
                   result += '<span></span></a></li>';
                 }
                 // 为了测试，延迟1秒加载
-                setTimeout(function(){
+                // setTimeout(function(){
                   $('.device-list').html(result);
                     // 每次数据加载完，必须重置
                     me.resetload();
@@ -155,10 +155,10 @@
                     // 解锁loadDownFn里锁定的情况
                     me.unlock();
                     me.noData(false);
-                },1000);
+                // },1000);
               },
-              error: function(xhr) {
-                console.log(xhr.status);
+              error: function (xhr) {
+                console.log(xhr.status + ' ' + xhr.statusText);
               }
            });
          },
@@ -205,13 +205,16 @@
                       me.noData();
                     }
                        // 为了测试，延迟1秒加载
-                       setTimeout(function(){
+                       // setTimeout(function(){
                            // 插入数据到页面，放到最后面
                            $('.device-list').append(result);
                            // 每次数据插入，必须重置
                            me.resetload();
-                       }, 1000);
-                   },
+                       // }, 1000);
+                     },
+                     error: function (xhr) {
+                      console.log(xhr.status + ' ' + xhr.statusText);
+                    }
                  });
               },
              threshold : 50

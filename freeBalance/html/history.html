@@ -113,7 +113,7 @@
 
                   var arrLen = data.data.res.length;
                   console.log(arrLen);
-                  if(arrLen > 0 && data.code === 1) {
+                  if(data.code === 1 && arrLen > 0) {
                     for(var i=0; i<arrLen; i++){
                       result += '<div class="history-item">';
                       result += '<p class="historyTime">'+ res[i].ctime +'</p>';
@@ -142,7 +142,7 @@
                   // }, 1000);
                 },
                 error: function (xhr) {
-                  console.log(xhr.status);
+                  console.log(xhr.status + ' ' + xhr.statusText);
                 }
               });
            },
